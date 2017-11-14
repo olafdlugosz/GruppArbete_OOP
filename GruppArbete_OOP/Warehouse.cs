@@ -42,13 +42,20 @@ namespace GruppArbete_OOP
         public void LoadData() {
             StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.txt");
             string line;
-            while ((line = reader.ReadLine()) != null) {  //TODO Check the enum for type and create therefore a new class. ADD GUID from one the array fields.
-                var fields = line.Split(new[] { ',' });  //TODO Check what kind of class the item is, then add to the corresponding list.
+            while ((line = reader.ReadLine()) != null) {  //TODO How to NOT create conflicting GUIDS?
+                var fields = line.Split(new[] { ',' });  
                 // Item item = new Item(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]); 
-                // carListBox.Items.Add(car.DisplayCarInfo());
-                WarehouseStorage.Add(new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), (TYPE)Enum.Parse(typeof(TYPE), (fields[3]))));
+                // ListBox.Items.Add;
+                if (fields[3] == "Book") {
+                    WarehouseStorage.Add(Guid.Parse(fields[4]), new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
+                    BookList.Add(new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
+                }
+                if (fields[3] == "Film") {
+                    WarehouseStorage.Add(Guid.Parse(fields[4]), new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
+                    FilmList.Add(new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
+                }
             }
-        } //TODO use Serialize 
+        }
         public void FindObject() { } //TODO Discuss different appraoches and applications with the group
                
         public void PrintToFile() {
