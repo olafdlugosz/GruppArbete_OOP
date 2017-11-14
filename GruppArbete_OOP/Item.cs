@@ -30,6 +30,13 @@ namespace GruppArbete_OOP
             this.Quantity = Quantity;
             this.Type = Type;
         }
+        public Item(string Title, int Price, int Quantity, string Type, Guid Identifier) {
+            this.Identifier = Identifier;
+            this.Title = Title;
+            this.Price = Price;
+            this.Quantity = Quantity;
+            this.Type = Type;
+        }
         public virtual void ChangePrice(double Price) { }
 
         public override string ToString() {
@@ -52,13 +59,17 @@ namespace GruppArbete_OOP
     class Book : Item
     {
         public Book(string Title, int Price, int Quantity, string Type) : base(Title, Price, Quantity, Type) {
-            this.Type = "Book";
+        }
+
+        public Book(string Title, int Price, int Quantity, string Type, Guid Identifier) : base(Title, Price, Quantity, Type, Identifier) {
         }
     }
     class Film : Item
     {
-        public Film(string Name, int Price, int Quantity, string Type) : base(Name, Price, Quantity, Type) {
-            this.Type = "Film";
+        public Film(string Title, int Price, int Quantity, string Type) : base(Title, Price, Quantity, Type) {
+        }
+
+        public Film(string Title, int Price, int Quantity, string Type, Guid Identifier) : base(Title, Price, Quantity, Type, Identifier) {
         }
     }
 }
