@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GruppArbete_OOP"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="525">
-    <Grid>
-        
-    </Grid>
+        Title="Warehouse" Height="400" Width="525">
+    <StackPanel>
+        <DockPanel>
+            <Menu DockPanel.Dock="Top">
+                <MenuItem Header="Database">
+                    <MenuItem Header="Save"/>
+                    <MenuItem Header="Load"/>
+                </MenuItem>
+            </Menu>
+        </DockPanel>
+        <StackPanel Orientation="Horizontal">
+            <StackPanel Width="30"/>
+            <StackPanel Margin="10, 0, 50, 0" VerticalAlignment="Center">
+                <TextBlock Text ="Type:" HorizontalAlignment="Center"/>
+                <ComboBox x:Name="ComboBox" Margin="10,0,10,10" Width="120"/>
+                <TextBlock Text="Name:" HorizontalAlignment="Center"/>
+                <TextBox x:Name="NameTextBox" Margin="10,0,10,10"/>
+                <TextBlock Text="Price:" HorizontalAlignment="Center"/>
+                <TextBox x:Name="PriceTextBox" Margin="10,0,10,10"/>
+                <TextBlock Text ="Stock:" HorizontalAlignment="Center"/>
+                <TextBox x:Name="QuantityTextBox" Margin="10,0,10,10"/>
+                <TextBlock Text ="Article Number:" HorizontalAlignment="Center"/>
+                <TextBox x:Name="GuidTextBox" Margin="10,0,10,10"/>
+            </StackPanel>
+            <StackPanel Margin="40,10,10,10" VerticalAlignment="Center">
+                <TextBlock Text="Search results:" HorizontalAlignment="Center"/>
+                <ListBox x:Name="ItemListBox" Height="250" Width="200"/>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" >
+            <StackPanel Width="20"/>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Button x:Name="AddNewItemButton" Content="Add new Item" Margin="5" FontSize="14" Width="100" Click="AddNewItemButton_Click"/>
+                <Button x:Name="SearchButton" Content="Search" Margin="5" FontSize="14" Width="48"/>
+            </StackPanel>
+            <StackPanel Width= "68"/>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <Button x:Name="AddToCartButton" Content="Add to cart" Margin="5" FontSize="14" Width="80"/>
+                <Button x:Name="ViewCartButton" Content="View cart" Margin="5" FontSize="14" Width="70"/>
+            </StackPanel>
+        </StackPanel>
+
+    </StackPanel>
 </Window>

@@ -20,8 +20,25 @@ namespace GruppArbete_OOP
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow() {
+        public MainWindow()
+        {
             InitializeComponent();
+            ComboBox.Da = Enum.GetValues(typeof(TYPE))
+        }
+        private string Title => NameTextBox.Text;
+        private int Price {
+            get {
+                int.TryParse(PriceTextBox.Text, out int year); return year;
+            }
+        }
+        private int Quantity {
+            get {
+                int.TryParse(QuantityTextBox.Text, out int year); return year;
+            }
+        }
+        private TYPE Type => Co
+        private void AddNewItemButton_Click(object sender, RoutedEventArgs e) {
+
         }
     }
 }
