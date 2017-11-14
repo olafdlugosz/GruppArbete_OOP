@@ -35,12 +35,12 @@
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" >
-            <StackPanel Width="20"/>
             <StackPanel Orientation="Horizontal" Margin="10">
-                <Button x:Name="AddNewItemButton" Content="Add new Item" Margin="5" FontSize="14" Width="100" Click="AddNewItemButton_Click"/>
+                <Button x:Name="AddNewItemButton" Content="Add Item" Margin="5" FontSize="14" Width="65" Click="AddNewItemButton_Click"/>
+                <Button x:Name="RemoveButton" Content="Remove Item" Margin="5" FontSize="14" Width="90"/>
                 <Button x:Name="SearchButton" Content="Search" Margin="5" FontSize="14" Width="48"/>
             </StackPanel>
-            <StackPanel Width= "68"/>
+            <StackPanel Width= "23"/>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Button x:Name="AddToCartButton" Content="Add to cart" Margin="5" FontSize="14" Width="80"/>
                 <Button x:Name="ViewCartButton" Content="View cart" Margin="5" FontSize="14" Width="70"/>
