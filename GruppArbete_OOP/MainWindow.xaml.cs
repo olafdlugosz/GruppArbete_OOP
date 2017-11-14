@@ -23,7 +23,7 @@ namespace GruppArbete_OOP
         public MainWindow()
         {
             InitializeComponent();
-            ComboBox.Da = Enum.GetValues(typeof(TYPE))
+            ComboBox.Da = Enum.GetValues(typeof(TYPE)) 
         }
         private string Title => NameTextBox.Text;
         private int Price {
