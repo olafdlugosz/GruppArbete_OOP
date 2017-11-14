@@ -19,7 +19,7 @@
             <StackPanel Width="30"/>
             <StackPanel Margin="10, 0, 50, 0" VerticalAlignment="Center">
                 <TextBlock Text ="Type:" HorizontalAlignment="Center"/>
-                <ComboBox x:Name="ComboBox" Margin="10,0,10,10" Width="120"/>
+                <ComboBox x:Name="ComboBox" Margin="10,0,10,10" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
                 <TextBlock Text="Name:" HorizontalAlignment="Center"/>
                 <TextBox x:Name="NameTextBox" Margin="10,0,10,10"/>
                 <TextBlock Text="Price:" HorizontalAlignment="Center"/>

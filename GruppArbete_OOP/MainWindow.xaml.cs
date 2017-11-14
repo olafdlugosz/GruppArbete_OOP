@@ -20,12 +20,16 @@ namespace GruppArbete_OOP
     /// </summary>
     public partial class MainWindow : Window
     {
+        Warehouse warehouse = new Warehouse();
         public MainWindow()
         {
             InitializeComponent();
-            ComboBox.Da = Enum.GetValues(typeof(TYPE))
+
+            ComboBox.Items.Add("Book");
+            ComboBox.Items.Add("Film");
+            
         }
-        private string Title => NameTextBox.Text;
+        private new string Title => NameTextBox.Text;
         private int Price {
             get {
                 int.TryParse(PriceTextBox.Text, out int year); return year;
@@ -36,8 +40,24 @@ namespace GruppArbete_OOP
                 int.TryParse(QuantityTextBox.Text, out int year); return year;
             }
         }
-        private TYPE Type => Co
+        private string Type => ComboBox.SelectedItem.ToString();
         private void AddNewItemButton_Click(object sender, RoutedEventArgs e) {
+            if (Type == "Book") {
+                Book book = new Book(Title, Price, Quantity, Type);
+                warehouse.WarehouseStorage.Add(book.Identifier, book);
+                warehouse.BookList.Add(book);
+                ItemListBox.Items.Add(book.Title);
+            }
+            if(Type == "Film") {
+                Film film = new Film(Title, Price, Quantity, Type);
+                warehouse.WarehouseStorage.Add(film.Identifier, film);
+                warehouse.FilmList.Add(film);
+                ItemListBox.Items.Add(film.Title);
+            }
+           
+        }
+
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
 
         }
     }

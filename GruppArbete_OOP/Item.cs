@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 namespace GruppArbete_OOP
 {
-    //public enum TYPE { Book, Film }
     abstract class Item : ITradable
     {
         private string _title { get; set; }
         private Guid _identifier { get; set; }
-        //private TYPE _type { get; set; }
+
         private int _price { get; set; }
         private int _quantity { get; set; }
         private string _type { get; set; }
