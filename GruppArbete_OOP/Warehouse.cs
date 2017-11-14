@@ -30,21 +30,30 @@ namespace GruppArbete_OOP
             writer.Close();
             writer.Dispose();
         }
-        public void SaveData(List<Item> itemList) {
-            StreamWriter writer = new StreamWriter($"{FilePath}//{itemList}.txt", false);
-            foreach (var item in itemList) {
+        public void SaveData(List<Book> BookList) { //TODO WHY THE FUCK DOESNT INHERITENCE WORK? I Have to make seperate methods for Book and Film,
+            //I cannot just make a generic method for any Item.
+            StreamWriter writer = new StreamWriter($"{FilePath}//BookList.txt", false);
+            foreach (var item in BookList) {
                 writer.WriteLine(item.LineUpClassPropertiesForStreamReader());
             }
             writer.Close();
             writer.Dispose();
         }
-    
+        public void SaveData(List<Film> FilmList) {
+            StreamWriter writer = new StreamWriter($"{FilePath}//FilmList.txt", false);
+            foreach (var item in FilmList) {
+                writer.WriteLine(item.LineUpClassPropertiesForStreamReader());
+            }
+            writer.Close();
+            writer.Dispose();
+        }
+
         public void LoadData() {
             StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.txt");
             string line;
             while ((line = reader.ReadLine()) != null) {
                 var fields = line.Split(new[] { ',' });  
-                // Item item = new Item(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]); 
+                
                 // ListBox.Items.Add;
                 if (fields[3] == "Book") {
                     WarehouseStorage.Add(Guid.Parse(fields[4]), new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
@@ -57,7 +66,7 @@ namespace GruppArbete_OOP
                 }
             }
         }
-        public void FindObject() { } //TODO Discuss different appraoches and applications with the group
+        public void FindObject() { } //TODO Discuss different appraoches and applications with the group. USE LINQ! Delegates maybe?
                
         public void PrintToFile() {
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);

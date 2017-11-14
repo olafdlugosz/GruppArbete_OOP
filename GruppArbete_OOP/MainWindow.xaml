@@ -9,9 +9,9 @@
     <StackPanel>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Database">
-                    <MenuItem Header="Save"/>
-                    <MenuItem Header="Load"/>
+                <MenuItem Header="Database" Click="MenuItem_Click">
+                    <MenuItem Header="Save" Click="MenuItem_Click_1"/>
+                    <MenuItem Header="Load" Click="MenuItem_Click_2"/>
                 </MenuItem>
             </Menu>
         </DockPanel>

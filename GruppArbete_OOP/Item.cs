@@ -52,7 +52,7 @@ namespace GruppArbete_OOP
             //TODO Place under the same event handler as List.Add()
         }
         public string LineUpClassPropertiesForStreamReader() {
-            return String.Format($"{Title}{Price}{Quantity}{Type}{Identifier}");
+            return String.Format($"{Title},{Price},{Quantity},{Type},{Identifier}");
         }
     }
     class Book : Item
