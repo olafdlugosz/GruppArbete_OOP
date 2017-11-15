@@ -65,8 +65,39 @@ namespace GruppArbete_OOP
                 }
             }
         }
-        public void FindObject() { } //TODO Discuss different appraoches and applications with the group. USE LINQ! Delegates maybe?
-               
+
+        public List<Item> CheckObjectType(ComboBox comboBox)
+        {
+            if (comboBox.SelectedItem.ToString() == "Book")
+                return BookList.ToList<Item>();
+            else if (comboBox.SelectedItem.ToString() == "Film")
+                return FilmList.ToList<Item>();
+            else
+                return null;
+        }
+
+        public List<Item> PerformSearch(List<Item> searchList, object type, string name, string price, string quantity, string guid)
+        {
+            List<Item> results = new List<Item>();
+
+            var resultList = from i in searchList
+                             where i.Type.Contains(type.ToString())
+                             where i.Title.Contains(name)
+                             where i.Price.ToString().Contains(price)
+                             where i.Quantity.ToString().Contains(quantity)
+                             where i.Identifier.ToString().Contains(guid)
+                             orderby i ascending
+                             select i;
+
+            foreach (var item in resultList)
+            {
+                results.Add(item);
+            }
+
+            return results;
+
+        }
+
         public void PrintToFile() {
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             StreamWriter writer = new StreamWriter($"{filePath}//WarehouseStorage.txt", false);

@@ -23,6 +23,7 @@ namespace GruppArbete_OOP
     public partial class MainWindow : Window
     {
         Warehouse warehouse = new Warehouse();
+        List<Item> _resultList;
 
         public MainWindow()
         {
@@ -99,38 +100,17 @@ namespace GruppArbete_OOP
             else
             {
                 ClearListBox();
-                PerformSearch(CheckObjectType(ComboBox));
+                _resultList = warehouse.PerformSearch(warehouse.CheckObjectType(ComboBox), 
+                    ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text, 
+                    QuantityTextBox.Text, GuidTextBox.Text);
+
+                foreach (var item in _resultList)
+                {
+                    ItemListBox.Items.Add(item.Title);
+                }
             }
         }
 
-        private void PerformSearch(List<Item> searchList)
-        {
-
-            var resultList = from i in searchList
-                             where i.Type.Contains(ComboBox.SelectedItem.ToString())
-                             where i.Title.Contains(NameTextBox.Text)
-                             where i.Price.ToString().Contains(PriceTextBox.Text)
-                             where i.Quantity.ToString().Contains(QuantityTextBox.Text)
-                             where i.Identifier.ToString().Contains(GuidTextBox.Text)
-                             orderby i ascending
-                             select i;
-
-            foreach (var item in resultList)
-            {
-                ItemListBox.Items.Add(item.Title);
-            }
-
-        }
-
-        private List<Item> CheckObjectType(ComboBox comboBox)
-        {
-            if (ComboBox.SelectedItem.ToString() == "Book")
-                return warehouse.BookList.ToList<Item>();
-            else if (ComboBox.SelectedItem.ToString() == "Film")
-                return warehouse.FilmList.ToList<Item>();
-            else
-                return null;
-        }
 
         private void ClearTextBoxes()
         {
