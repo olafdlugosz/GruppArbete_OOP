@@ -24,8 +24,11 @@ namespace GruppArbete_OOP
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e) {
-
+        private void Print_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog printDlg = new PrintDialog();
+            printDlg.ShowDialog();
+            printDlg.PrintVisual(CartListBox, "Cart Printing.");
         }
     }
 }
