@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-
+using System.Windows.Controls;
 
 namespace GruppArbete_OOP
 {
@@ -91,11 +91,6 @@ namespace GruppArbete_OOP
             writer.WriteLine(item.ToString());            
             writer.Close();
             writer.Dispose();
-        }
-       
-        public void PrintToPaper() {
-            throw new NotImplementedException();
-            
         }
 
         public void PrintToScreen() { //CAN BE USED AS A DELEGATE INSIDE CONSOLE WRITELINE METHOD!

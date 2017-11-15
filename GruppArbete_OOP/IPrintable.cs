@@ -9,7 +9,6 @@ namespace GruppArbete_OOP
     interface IPrintable
     {
         void PrintToScreen(); //Printling Function
-        void PrintToPaper(); //TODO Add DateTime on the printout page
         void PrintToFile(); //TODO Fuck about with StreamWriter
     }
 }

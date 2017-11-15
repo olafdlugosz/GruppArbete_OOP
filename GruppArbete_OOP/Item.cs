@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GruppArbete_OOP
 {
-    abstract class Item : ITradable, IItem
+    abstract class Item : ITradable, IComparable
     {
         private string _title { get; set; }
         private Guid _identifier { get; set; }
@@ -53,6 +53,12 @@ namespace GruppArbete_OOP
         }
         public string LineUpClassPropertiesForStreamReader() {
             return String.Format($"{Title},{Price},{Quantity},{Type},{Identifier}");
+        }
+
+        public int CompareTo(object obj)
+        {
+            Item item = obj as Item;
+            return this.Price - item.Price;
         }
     }
     class Book : Item
