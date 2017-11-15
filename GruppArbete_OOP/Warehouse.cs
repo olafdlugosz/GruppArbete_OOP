@@ -42,7 +42,7 @@ namespace GruppArbete_OOP
         public void LoadData() {
             StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.txt");
             string line;
-            while ((line = reader.ReadLine()) != null) {  //TODO How to NOT create conflicting GUIDS?
+            while ((line = reader.ReadLine()) != null) {
                 var fields = line.Split(new[] { ',' });  
                 // Item item = new Item(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]); 
                 // ListBox.Items.Add;
@@ -53,6 +53,7 @@ namespace GruppArbete_OOP
                 if (fields[3] == "Film") {
                     WarehouseStorage.Add(Guid.Parse(fields[4]), new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
                     FilmList.Add(new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
+                    
                 }
             }
         }
