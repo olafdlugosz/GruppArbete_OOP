@@ -28,7 +28,7 @@ namespace GruppArbete_OOP
         {
             PrintDialog printDlg = new PrintDialog();
             printDlg.ShowDialog();
-            printDlg.PrintVisual(CartListBox, "Listbox Printing.");
+            printDlg.PrintVisual(CartListBox, "Cart Printing.");
         }
     }
 }
