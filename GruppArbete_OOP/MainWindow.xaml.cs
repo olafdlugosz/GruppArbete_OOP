@@ -24,10 +24,8 @@ namespace GruppArbete_OOP
         public MainWindow()
         {
             InitializeComponent();
-
             ComboBox.Items.Add("Book");
             ComboBox.Items.Add("Film");
-            
         }
         private new string Title => NameTextBox.Text;
         private int Price {
