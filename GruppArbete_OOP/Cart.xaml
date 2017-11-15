@@ -20,7 +20,7 @@
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="BackToWarehouseButton" Content="Back to Warehouse" Margin="5" FontSize="14" Width="130"/>
-            <Button x:Name="RemoveFromCartButton" Content="Remove item" Margin="5" FontSize="14" Width="90"/>
+            <Button x:Name="RemoveFromCartButton" Content="Remove item" Margin="5" FontSize="14" Width="90" Click="RemoveFromCartButton_Click"/>
             <Button x:Name="ClearCartButton" Content="Clear Cart" Margin="5" FontSize="14" Width="90"/>
         </StackPanel>
     </StackPanel>

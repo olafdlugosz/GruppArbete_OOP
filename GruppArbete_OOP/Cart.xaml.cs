@@ -36,5 +36,9 @@ namespace GruppArbete_OOP
 
         }
 
+        private void RemoveFromCartButton_Click(object sender, RoutedEventArgs e) {
+            int index = CartListBox.SelectedIndex;
+            CartListBox.Items.RemoveAt(index);
+        }
     }
 }

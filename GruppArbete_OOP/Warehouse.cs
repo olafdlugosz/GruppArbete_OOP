@@ -22,7 +22,7 @@ namespace GruppArbete_OOP
             FilmList = new List<Film>();
             FilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
-        public void SaveData(Dictionary<Guid,Item> WarehouseStorage) {
+        public void SaveData(Dictionary<Guid, Item> WarehouseStorage) {
             StreamWriter writer = new StreamWriter($"{FilePath}//WarehouseDatabase.dat", false);
             foreach (var item in WarehouseStorage) {
                 writer.WriteLine(item.Value.LineUpClassPropertiesForStreamReader());
@@ -30,7 +30,7 @@ namespace GruppArbete_OOP
             writer.Close();
             writer.Dispose();
         }
-        public void SaveData(List<Book> BookList) { 
+        public void SaveData(List<Book> BookList) {
             StreamWriter writer = new StreamWriter($"{FilePath}//BookList.txt", false);
             foreach (var item in BookList) {
                 writer.WriteLine(item.ToString());
@@ -51,8 +51,8 @@ namespace GruppArbete_OOP
             StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.dat");
             string line;
             while ((line = reader.ReadLine()) != null) {
-                var fields = line.Split(new[] { ',' });  
-                
+                var fields = line.Split(new[] { ',' });
+
                 // ListBox.Items.Add;
                 if (fields[3] == "Book") {
                     WarehouseStorage.Add(Guid.Parse(fields[4]), new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
@@ -61,13 +61,12 @@ namespace GruppArbete_OOP
                 if (fields[3] == "Film") {
                     WarehouseStorage.Add(Guid.Parse(fields[4]), new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
                     FilmList.Add(new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
-                    
+
                 }
             }
         }
 
-        public List<Item> CheckObjectType(ComboBox comboBox)
-        {
+        public List<Item> CheckObjectType(ComboBox comboBox) {
             if (comboBox.SelectedItem.ToString() == "Book")
                 return BookList.ToList<Item>();
             else if (comboBox.SelectedItem.ToString() == "Film")
@@ -76,8 +75,7 @@ namespace GruppArbete_OOP
                 return null;
         }
 
-        public List<Item> PerformSearch(List<Item> searchList, object type, string name, string price, string quantity, string guid)
-        {
+        public List<Item> PerformSearch(List<Item> searchList, object type, string name, string price, string quantity, string guid) {
             List<Item> results = new List<Item>();
 
             var resultList = from i in searchList
@@ -89,8 +87,7 @@ namespace GruppArbete_OOP
                              orderby i ascending
                              select i;
 
-            foreach (var item in resultList)
-            {
+            foreach (var item in resultList) {
                 results.Add(item);
             }
 
@@ -117,9 +114,9 @@ namespace GruppArbete_OOP
             writer.Dispose();
         }
         public void PrintToFile(Item item) { //PrintToFile() is polymorphic. Can be used with or without input parameters.
-            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);            
+            string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             StreamWriter writer = new StreamWriter($"{filePath}\\{item.Title}.txt", false); //TODO find filepath generic for all desktops.
-            writer.WriteLine(item.ToString());            
+            writer.WriteLine(item.ToString());
             writer.Close();
             writer.Dispose();
         }
@@ -127,7 +124,7 @@ namespace GruppArbete_OOP
         public void PrintToScreen() { //CAN BE USED AS A DELEGATE INSIDE CONSOLE WRITELINE METHOD!
             foreach (var item in WarehouseStorage) {
                 item.Value.ToString();
-            }            
+            }
         }
         public void PrintToScreen(List<Item> List) {
             List.ForEach(item => item.ToString());
