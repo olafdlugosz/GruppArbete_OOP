@@ -38,7 +38,7 @@
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Button x:Name="AddNewItemButton" Content="Add Item" Margin="5" FontSize="14" Width="65" Click="AddNewItemButton_Click"/>
                 <Button x:Name="RemoveButton" Content="Remove Item" Margin="5" FontSize="14" Width="90"/>
-                <Button x:Name="SearchButton" Content="Search" Margin="5" FontSize="14" Width="48"/>
+                <Button x:Name="SearchButton" Content="Search" Margin="5" FontSize="14" Width="48" Click="SearchButton_Click"/>
             </StackPanel>
             <StackPanel Width= "23"/>
             <StackPanel Orientation="Horizontal" Margin="10">

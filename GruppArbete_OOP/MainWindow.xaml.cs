@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Diagnostics;
+using System.Collections;
 
 namespace GruppArbete_OOP
 {
@@ -22,60 +23,108 @@ namespace GruppArbete_OOP
     public partial class MainWindow : Window
     {
         Warehouse warehouse = new Warehouse();
-        
+        List<Item> _resultList;
+
         public MainWindow()
         {
             InitializeComponent();
             ComboBox.Items.Add("Book");
-            ComboBox.Items.Add("Film");           
+            ComboBox.Items.Add("Film");
         }
         private new string Title => NameTextBox.Text;
-        private int Price {
-            get {
+        private int Price
+        {
+            get
+            {
                 int.TryParse(PriceTextBox.Text, out int year); return year;
             }
         }
-        private int Quantity {
-            get {
+        private int Quantity
+        {
+            get
+            {
                 int.TryParse(QuantityTextBox.Text, out int year); return year;
             }
         }
-        private string Type => ComboBox.SelectedItem.ToString();
-        private void AddNewItemButton_Click(object sender, RoutedEventArgs e) {
-            if (Type == "Book") {
+        //TODO Handle exceptions of empty boxes.
+        private string Type => ComboBox.SelectedItem.ToString(); 
+        private void AddNewItemButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (Type == "Book")
+            {
                 Book book = new Book(Title, Price, Quantity, Type);
                 warehouse.WarehouseStorage.Add(book.Identifier, book);
                 warehouse.BookList.Add(book);
                 ItemListBox.Items.Add(book.Title);
             }
-            if(Type == "Film") {
+            if (Type == "Film")
+            {
                 Film film = new Film(Title, Price, Quantity, Type);
                 warehouse.WarehouseStorage.Add(film.Identifier, film);
                 warehouse.FilmList.Add(film);
                 ItemListBox.Items.Add(film.Title);
             }
             //Printling Function
-            foreach (var item in warehouse.WarehouseStorage) {
+            foreach (var item in warehouse.WarehouseStorage)
+            {
                 Console.WriteLine(item.Value.ToString());
             }
-           
+
+            ClearTextBoxes();
         }
 
-        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+        private void ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
 
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e) {           
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
         }
 
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e) {
+        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
+        {
             warehouse.SaveData(warehouse.WarehouseStorage);
-            if(warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
+            if (warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
             if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
         }
 
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e) {
+        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
+        {
             warehouse.LoadData();
+        }
+
+        private void SearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ComboBox.SelectedItem == null)
+                return;
+            else
+            {
+                ClearListBox();
+                _resultList = warehouse.PerformSearch(warehouse.CheckObjectType(ComboBox), 
+                    ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text, 
+                    QuantityTextBox.Text, GuidTextBox.Text);
+
+                foreach (var item in _resultList)
+                {
+                    ItemListBox.Items.Add(item.Title);
+                }
+            }
+        }
+
+
+        private void ClearTextBoxes()
+        {
+            ComboBox.SelectedItem = null;
+            NameTextBox.Clear();
+            PriceTextBox.Clear();
+            QuantityTextBox.Clear();
+            GuidTextBox.Clear();
+        }
+
+        private void ClearListBox()
+        {
+            ItemListBox.Items.Clear();
         }
     }
 }
