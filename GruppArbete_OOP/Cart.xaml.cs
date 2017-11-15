@@ -40,5 +40,9 @@ namespace GruppArbete_OOP
             int index = CartListBox.SelectedIndex;
             CartListBox.Items.RemoveAt(index);
         }
+
+        private void ClearCartButton_Click(object sender, RoutedEventArgs e) {
+            CartListBox.Items.Clear();
+        }
     }
 }
