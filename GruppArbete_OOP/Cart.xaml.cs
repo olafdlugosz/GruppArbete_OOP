@@ -30,5 +30,11 @@ namespace GruppArbete_OOP
             printDlg.ShowDialog();
             printDlg.PrintVisual(CartListBox, "Cart Printing.");
         }
+
+        private void SaveToFile_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

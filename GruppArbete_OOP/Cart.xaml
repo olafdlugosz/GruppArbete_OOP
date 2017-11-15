@@ -10,8 +10,8 @@
         <DockPanel>
             <Menu DockPanel.Dock="Top">
                 <MenuItem Header="Order">
-                    <MenuItem Name="SaveToFile" Header="Save to File"/>
-                    <MenuItem Name="Print" Header="Print" Click="Print_Click"/>
+                    <MenuItem Name="SaveToFile" Header="Save to File" Click="SaveToFile_Click"/>
+                    <MenuItem Name="Print" Header="Print and Expedite" Click="Print_Click"/>
                 </MenuItem>
             </Menu>
         </DockPanel>
