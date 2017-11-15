@@ -23,7 +23,7 @@ namespace GruppArbete_OOP
             FilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
         }
         public void SaveData(Dictionary<Guid,Item> WarehouseStorage) {
-            StreamWriter writer = new StreamWriter($"{FilePath}//WarehouseDatabase.txt", false);
+            StreamWriter writer = new StreamWriter($"{FilePath}//WarehouseDatabase.dat", false);
             foreach (var item in WarehouseStorage) {
                 writer.WriteLine(item.Value.LineUpClassPropertiesForStreamReader());
             }
@@ -48,7 +48,7 @@ namespace GruppArbete_OOP
         }
 
         public void LoadData() {
-            StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.txt");
+            StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.dat");
             string line;
             while ((line = reader.ReadLine()) != null) {
                 var fields = line.Split(new[] { ',' });  
