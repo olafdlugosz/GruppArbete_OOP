@@ -139,5 +139,9 @@ namespace GruppArbete_OOP
 
             _resultList.ForEach(i => ItemListBox.Items.Add(i.Title));
         }
+
+        private void ViewCartButton_Click(object sender, RoutedEventArgs e) {
+            Console.WriteLine(ItemListBox.SelectedItem);
+        }
     }
 }

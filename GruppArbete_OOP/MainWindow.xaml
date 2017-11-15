@@ -43,7 +43,7 @@
             <StackPanel Width= "23"/>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Button x:Name="AddToCartButton" Content="Add to cart" Margin="5" FontSize="14" Width="80"/>
-                <Button x:Name="ViewCartButton" Content="View cart" Margin="5" FontSize="14" Width="70"/>
+                <Button x:Name="ViewCartButton" Content="View cart" Margin="5" FontSize="14" Width="70" Click="ViewCartButton_Click"/>
             </StackPanel>
         </StackPanel>
 
