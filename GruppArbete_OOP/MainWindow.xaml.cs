@@ -46,7 +46,8 @@ namespace GruppArbete_OOP
                 int.TryParse(QuantityTextBox.Text, out int year); return year;
             }
         }
-        private string Type => ComboBox.SelectedItem.ToString();
+        //TODO Handle exceptions of empty boxes.
+        private string Type => ComboBox.SelectedItem.ToString(); 
         private void AddNewItemButton_Click(object sender, RoutedEventArgs e)
         {
             if (Type == "Book")
