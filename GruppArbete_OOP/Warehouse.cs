@@ -11,7 +11,7 @@ namespace GruppArbete_OOP
 
     class Warehouse : IPrintable
     {
-        public Dictionary<Guid, Item> WarehouseStorage { get; set; }
+        public Dictionary<Guid, Item> WarehouseStorage;
         public List<Book> BookList;
         public List<Film> FilmList;
         string FilePath;
@@ -30,11 +30,10 @@ namespace GruppArbete_OOP
             writer.Close();
             writer.Dispose();
         }
-        public void SaveData(List<Book> BookList) { //TODO WHY THE FUCK DOESNT INHERITENCE WORK? I Have to make seperate methods for Book and Film,
-            //I cannot just make a generic method for any Item.
-            StreamWriter writer = new StreamWriter($"{FilePath}//{BookList}.txt", false);
+        public void SaveData(List<Book> BookList) { 
+            StreamWriter writer = new StreamWriter($"{FilePath}//BookList.txt", false);
             foreach (var item in BookList) {
-                writer.WriteLine(item.LineUpClassPropertiesForStreamReader());
+                writer.WriteLine(item.ToString());
             }
             writer.Close();
             writer.Dispose();
@@ -42,7 +41,7 @@ namespace GruppArbete_OOP
         public void SaveData(List<Film> FilmList) {
             StreamWriter writer = new StreamWriter($"{FilePath}//FilmList.txt", false);
             foreach (var item in FilmList) {
-                writer.WriteLine(item.LineUpClassPropertiesForStreamReader());
+                writer.WriteLine(item.ToString());
             }
             writer.Close();
             writer.Dispose();
@@ -99,7 +98,7 @@ namespace GruppArbete_OOP
             
         }
 
-        public void PrintToScreen() { //The PrintToScreen() is polymorphic. Can be used with or without InputParameters
+        public void PrintToScreen() { //CAN BE USED AS A DELEGATE INSIDE CONSOLE WRITELINE METHOD!
             foreach (var item in WarehouseStorage) {
                 item.Value.ToString();
             }            

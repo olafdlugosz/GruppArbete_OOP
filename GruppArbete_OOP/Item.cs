@@ -39,10 +39,10 @@ namespace GruppArbete_OOP
         public virtual void ChangePrice(double Price) { }
 
         public override string ToString() {
-            return "Title: " + Title + "/n" +
-                "GUID " + Identifier + "/n" +
-                "Price: " + Price + "0:C" + "/n" +
-                "Quantity: " + Quantity + "/n";
+            return "Title: " + Title + " " +
+                "GUID: " + Identifier + " " +
+                "Price: " + Price + "kr" + " " +
+                "Quantity: " + Quantity + " ";
         }
         public void Sell(int Quantity, int Price) {
             if(Quantity != 0) { Quantity--; } //TODO link to messagebox. Write "You sold this item for + Price + 0:C! 
