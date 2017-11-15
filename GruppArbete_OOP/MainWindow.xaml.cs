@@ -105,10 +105,7 @@ namespace GruppArbete_OOP
                     ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text, 
                     QuantityTextBox.Text, GuidTextBox.Text);
 
-                foreach (var item in _resultList)
-                {
-                    ItemListBox.Items.Add(item.Title);
-                }
+                _resultList.ForEach(i => ItemListBox.Items.Add(i.Title));
             }
         }
 
@@ -125,6 +122,22 @@ namespace GruppArbete_OOP
         private void ClearListBox()
         {
             ItemListBox.Items.Clear();
+        }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e) {          
+            Item item = ItemListBox.SelectedItem as Item;
+            //_resultList.Remove(item);
+            if (item.Type == "Book"){
+                warehouse.BookList.Remove(item as Book);
+                warehouse.WarehouseStorage.Remove(item.Identifier);                                
+            }
+            else if(item.Type == "Film") {
+                warehouse.FilmList.Remove(item as Film);
+                warehouse.WarehouseStorage.Remove(item.Identifier);
+            }
+            ItemListBox.Items.Remove(item);
+
+            _resultList.ForEach(i => ItemListBox.Items.Add(i.Title));
         }
     }
 }
