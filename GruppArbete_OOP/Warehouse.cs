@@ -32,7 +32,7 @@ namespace GruppArbete_OOP
         }
         public void SaveData(List<Book> BookList) { //TODO WHY THE FUCK DOESNT INHERITENCE WORK? I Have to make seperate methods for Book and Film,
             //I cannot just make a generic method for any Item.
-            StreamWriter writer = new StreamWriter($"{FilePath}//BookList.txt", false);
+            StreamWriter writer = new StreamWriter($"{FilePath}//{BookList}.txt", false);
             foreach (var item in BookList) {
                 writer.WriteLine(item.LineUpClassPropertiesForStreamReader());
             }

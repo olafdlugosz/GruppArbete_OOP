@@ -72,7 +72,6 @@ namespace GruppArbete_OOP
             warehouse.SaveData(warehouse.WarehouseStorage);
             if(warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
             if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
-
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e) {
