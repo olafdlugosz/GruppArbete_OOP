@@ -75,23 +75,19 @@ namespace GruppArbete_OOP
                 return null;
         }
 
-        public List<Item> PerformSearch(List<Item> searchList, object type, string name, string price, string quantity, string guid) {
-            List<Item> results = new List<Item>();
+        public List<Item> PerformSearch(List<Item> searchList, object type, string name, string price, string quantity, string guid)
+        {
 
-            var resultList = from i in searchList
-                             where i.Type.Contains(type.ToString())
-                             where i.Title.Contains(name)
-                             where i.Price.ToString().Contains(price)
-                             where i.Quantity.ToString().Contains(quantity)
-                             where i.Identifier.ToString().Contains(guid)
-                             orderby i ascending
-                             select i;
+            var resultList = searchList
+                .Where(item => item.Type.Contains(type.ToString()))
+                .Where(item => item.Title.Contains(name))
+                .Where(item => item.Price.ToString().Contains(price))
+                .Where(item => item.Quantity.ToString().Contains(quantity))
+                .Where(item => item.Identifier.ToString().Contains(guid))
+                .OrderBy(item => item)
+                .Select(item => item).ToList();
 
-            foreach (var item in resultList) {
-                results.Add(item);
-            }
-
-            return results;
+            return resultList;
 
         }
 
