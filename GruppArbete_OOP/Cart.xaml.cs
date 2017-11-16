@@ -30,6 +30,8 @@ namespace GruppArbete_OOP
 
         public void AddToCart(Item item)
         {
+            item.Quantity = 0;
+
             for (int i = 0; i < _orderList.Count; i++)
             {
                 if (_orderList[i].Identifier == item.Identifier)
