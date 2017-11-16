@@ -30,7 +30,7 @@ namespace GruppArbete_OOP
 
         public void AddToCart(Item item)
         {
-            item.Quantity = 0;
+            item.Quantity = 1;
 
             for (int i = 0; i < _orderList.Count; i++)
             {
@@ -42,7 +42,7 @@ namespace GruppArbete_OOP
             }
 
             _orderList.Add(item);
-            CartListBox.Items.Add(item.Title);
+            CartListBox.Items.Add(item);
         }
 
         private void Print_Click(object sender, RoutedEventArgs e)
