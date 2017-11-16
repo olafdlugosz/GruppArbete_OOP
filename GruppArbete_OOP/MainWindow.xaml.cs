@@ -22,14 +22,17 @@ namespace GruppArbete_OOP
     /// </summary>
     public partial class MainWindow : Window
     {
-        Warehouse warehouse = new Warehouse();
-        List<Item> _resultList;
+        private Warehouse _warehouse = new Warehouse();
+        private List<Item> _resultList;
+        private Cart _cart;
 
         public MainWindow()
         {
             InitializeComponent();
             ComboBox.Items.Add("Book");
             ComboBox.Items.Add("Film");
+            _cart = new Cart(this);
+            _cart.Hide();
         }
         private new string Title => NameTextBox.Text;
         private int Price
@@ -53,19 +56,19 @@ namespace GruppArbete_OOP
             if (Type == "Book")
             {
                 Book book = new Book(Title, Price, Quantity, Type);
-                warehouse.WarehouseStorage.Add(book.Identifier, book);
-                warehouse.BookList.Add(book);
+                _warehouse.WarehouseStorage.Add(book.Identifier, book);
+                _warehouse.BookList.Add(book);
                 ItemListBox.Items.Add(book.Title);
             }
             if (Type == "Film")
             {
                 Film film = new Film(Title, Price, Quantity, Type);
-                warehouse.WarehouseStorage.Add(film.Identifier, film);
-                warehouse.FilmList.Add(film);
+                _warehouse.WarehouseStorage.Add(film.Identifier, film);
+                _warehouse.FilmList.Add(film);
                 ItemListBox.Items.Add(film.Title);
             }
             //Printling Function
-            foreach (var item in warehouse.WarehouseStorage)
+            foreach (var item in _warehouse.WarehouseStorage)
             {
                 Console.WriteLine(item.Value.ToString());
             }
@@ -84,14 +87,14 @@ namespace GruppArbete_OOP
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            warehouse.SaveData(warehouse.WarehouseStorage);
-            if (warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
-            if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
+            _warehouse.SaveData(_warehouse.WarehouseStorage);
+            if (_warehouse.BookList.Count != 0) { _warehouse.SaveData(_warehouse.BookList); };
+            if (_warehouse.FilmList.Count != 0) { _warehouse.SaveData(_warehouse.FilmList); };
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            warehouse.LoadData();
+            _warehouse.LoadData();
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -101,7 +104,7 @@ namespace GruppArbete_OOP
             else
             {
                 ClearListBox();
-                _resultList = warehouse.PerformSearch(warehouse.CheckObjectType(ComboBox), 
+                _resultList = _warehouse.PerformSearch(_warehouse.CheckObjectType(ComboBox), 
                     ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text, 
                     QuantityTextBox.Text, GuidTextBox.Text);
 
@@ -138,9 +141,22 @@ namespace GruppArbete_OOP
                 ItemListBox.Items.RemoveAt(ItemListBox.SelectedIndex);
             }
 
-            warehouse.RemoveItems(itemToRemove);
+            _warehouse.RemoveItems(itemToRemove);
         }
 
+        private void ViewCartButton_Click(object sender, RoutedEventArgs e)
+        {
+            _cart.Show();
+            this.Hide();
+        }
 
+        private void AddToCartButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ItemListBox.SelectedIndex >= 0)
+            {
+                Item itemToAddToCart = _resultList[ItemListBox.SelectedIndex];
+                _cart.AddToCart(itemToAddToCart);
+            }
+        }
     }
 }
