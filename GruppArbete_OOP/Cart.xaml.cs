@@ -30,17 +30,20 @@ namespace GruppArbete_OOP
 
         public void AddToCart(Item item)
         {
-            item.Quantity = 1;
+            item.Quantity = 0;
 
             for (int i = 0; i < _orderList.Count; i++)
             {
                 if (_orderList[i].Identifier == item.Identifier)
                 {
-                    _orderList[i].Quantity++;
+                    _orderList[i].ChangeQuantity();
+                    CartListBox.Items.Remove(_orderList[i]);
+                    CartListBox.Items.Add(_orderList[i]);
                     return;
                 }
             }
 
+            item.ChangeQuantity();
             _orderList.Add(item);
             CartListBox.Items.Add(item);
         }

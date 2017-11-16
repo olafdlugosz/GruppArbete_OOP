@@ -47,7 +47,7 @@ namespace GruppArbete_OOP
         public void Sell(int Quantity, int Price) {
             if(Quantity != 0) { Quantity--; } //TODO link to messagebox. Write "You sold this item for + Price + 0:C! 
         }
-        public void Restock(int Quantity) {
+        public void ChangeQuantity() {
             Quantity++;
             //TODO Place under the same event handler as List.Add()
         }

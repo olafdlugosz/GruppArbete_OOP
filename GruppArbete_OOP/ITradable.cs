@@ -11,6 +11,6 @@ namespace GruppArbete_OOP
         int Price { get; set; }
         int Quantity { get; set; }
         void Sell(int Quantity, int Price);
-        void Restock(int Quantity);
+        void ChangeQuantity();
     }
 }
