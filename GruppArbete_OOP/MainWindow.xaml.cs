@@ -126,5 +126,20 @@ namespace GruppArbete_OOP
         {
             ItemListBox.Items.Clear();
         }
+
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Item itemToRemove = null;
+
+            if (this.ItemListBox.SelectedIndex >= 0)
+            {
+                itemToRemove = _resultList[ItemListBox.SelectedIndex];
+                ItemListBox.Items.RemoveAt(ItemListBox.SelectedIndex);
+            }
+
+            warehouse.RemoveItems(itemToRemove);
+        }
+
+
     }
 }
