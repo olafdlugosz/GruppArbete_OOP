@@ -79,11 +79,11 @@ namespace GruppArbete_OOP
         {
 
             var resultList = searchList
-                .Where(item => item.Type.Contains(type.ToString()))
-                .Where(item => item.Title.Contains(name))
+                .Where(item => item.Type.ToLower().Contains(type.ToString().ToLower()))
+                .Where(item => item.Title.ToLower().Contains(name.ToLower()))
                 .Where(item => item.Price.ToString().Contains(price))
                 .Where(item => item.Quantity.ToString().Contains(quantity))
-                .Where(item => item.Identifier.ToString().Contains(guid))
+                .Where(item => item.Identifier.ToString().ToLower().Contains(guid.ToLower()))
                 .OrderBy(item => item)
                 .Select(item => item).ToList();
 
