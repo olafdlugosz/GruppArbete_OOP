@@ -134,6 +134,7 @@ namespace GruppArbete_OOP
             if (this.ItemListBox.SelectedIndex >= 0)
             {
                 itemToRemove = _resultList[ItemListBox.SelectedIndex];
+                _resultList.RemoveAt(ItemListBox.SelectedIndex);
                 ItemListBox.Items.RemoveAt(ItemListBox.SelectedIndex);
             }
 
