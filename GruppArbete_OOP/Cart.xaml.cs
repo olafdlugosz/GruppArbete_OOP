@@ -30,6 +30,15 @@ namespace GruppArbete_OOP
 
         public void AddToCart(Item item)
         {
+            for (int i = 0; i < _orderList.Count; i++)
+            {
+                if (_orderList[i].Identifier == item.Identifier)
+                {
+                    _orderList[i].Quantity++;
+                    return;
+                }
+            }
+
             _orderList.Add(item);
             CartListBox.Items.Add(item.Title);
         }
@@ -50,8 +59,15 @@ namespace GruppArbete_OOP
         {
             if (CartListBox.SelectedIndex >= 0)
             {
-                _orderList.RemoveAt(CartListBox.SelectedIndex);
-                CartListBox.Items.RemoveAt(CartListBox.SelectedIndex);
+                if (_orderList[CartListBox.SelectedIndex].Quantity > 0)
+                {
+                    _orderList[CartListBox.SelectedIndex].Quantity--;
+                }
+                else
+                {
+                    _orderList.RemoveAt(CartListBox.SelectedIndex);
+                    CartListBox.Items.RemoveAt(CartListBox.SelectedIndex);
+                }
             }
         }
 
