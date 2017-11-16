@@ -99,7 +99,6 @@ namespace GruppArbete_OOP
 
         public void RemoveItems(Item itemToRemove)
         {
-
             WarehouseStorage.Remove(itemToRemove.Identifier);
 
             switch (itemToRemove.Type)

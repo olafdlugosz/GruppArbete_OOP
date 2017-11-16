@@ -128,9 +128,10 @@ namespace GruppArbete_OOP
         {
             Item itemToRemove = null;
 
-            if (this.ItemListBox.SelectedIndex >= 0)
+            if (ItemListBox.SelectedIndex >= 0)
             {
                 itemToRemove = _resultList[ItemListBox.SelectedIndex];
+                _resultList.RemoveAt(ItemListBox.SelectedIndex);
                 ItemListBox.Items.RemoveAt(ItemListBox.SelectedIndex);
             }
 
