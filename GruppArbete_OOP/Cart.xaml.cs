@@ -19,9 +19,19 @@ namespace GruppArbete_OOP
     /// </summary>
     public partial class Cart : Window
     {
-        public Cart()
+        private List<Item> _orderList = new List<Item>();
+        private MainWindow _mainWindow;
+
+        public Cart(MainWindow mainWindow)
         {
+            this._mainWindow = mainWindow;
             InitializeComponent();
+        }
+
+        public void AddToCart(Item item)
+        {
+            _orderList.Add(item);
+            CartListBox.Items.Add(item.Title);
         }
 
         private void Print_Click(object sender, RoutedEventArgs e)
@@ -36,13 +46,25 @@ namespace GruppArbete_OOP
 
         }
 
-        private void RemoveFromCartButton_Click(object sender, RoutedEventArgs e) {
-            int index = CartListBox.SelectedIndex;
-            CartListBox.Items.RemoveAt(index);
+        private void RemoveFromCartButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CartListBox.SelectedIndex >= 0)
+            {
+                _orderList.RemoveAt(CartListBox.SelectedIndex);
+                CartListBox.Items.RemoveAt(CartListBox.SelectedIndex);
+            }
         }
 
-        private void ClearCartButton_Click(object sender, RoutedEventArgs e) {
+        private void BackToWarehouseButton_Click(object sender, RoutedEventArgs e)
+        {
+            _mainWindow.Show();
+            this.Hide();
+        }
+
+        private void ClearCartButton_Click(object sender, RoutedEventArgs e)
+        {
             CartListBox.Items.Clear();
+            _orderList.Clear();
         }
     }
 }

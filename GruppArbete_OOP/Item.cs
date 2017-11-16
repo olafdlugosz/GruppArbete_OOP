@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GruppArbete_OOP
 {
-    abstract class Item : ITradable, IComparable
+    public abstract class Item : ITradable, IComparable
     {
         private string _title { get; set; }
         private Guid _identifier { get; set; }
