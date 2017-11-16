@@ -126,12 +126,12 @@ namespace GruppArbete_OOP
 
         private void RemoveButton_Click(object sender, RoutedEventArgs e) {          
             Item item = ItemListBox.SelectedItem as Item;
-            //_resultList.Remove(item);
-            if (item.Type == "Book"){
+            _resultList.Remove(item);
+            if (Type == "Book"){
                 warehouse.BookList.Remove(item as Book);
                 warehouse.WarehouseStorage.Remove(item.Identifier);                                
             }
-            else if(item.Type == "Film") {
+            else if(Type == "Film") {
                 warehouse.FilmList.Remove(item as Film);
                 warehouse.WarehouseStorage.Remove(item.Identifier);
             }

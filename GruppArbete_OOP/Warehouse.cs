@@ -104,7 +104,7 @@ namespace GruppArbete_OOP
             writer.Close();
             writer.Dispose();
         }
-        public void PrintToFile(List<Item> list) { //PrintToFile() is polymorphic. Can be used with or without input parameters.
+        public void PrintToFile(List<Item> list) { //PrintToFile() is overloaded. Can be used with or without input parameters.
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             StreamWriter writer = new StreamWriter($"{filePath}\\{list}.txt", false);
             foreach (var item in list) {
