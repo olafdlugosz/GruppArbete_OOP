@@ -124,24 +124,19 @@ namespace GruppArbete_OOP
             ItemListBox.Items.Clear();
         }
 
-        private void RemoveButton_Click(object sender, RoutedEventArgs e) {          
-            Item item = ItemListBox.SelectedItem as Item;
-            _resultList.Remove(item);
-            if (Type == "Book"){
-                warehouse.BookList.Remove(item as Book);
-                warehouse.WarehouseStorage.Remove(item.Identifier);                                
-            }
-            else if(Type == "Film") {
-                warehouse.FilmList.Remove(item as Film);
-                warehouse.WarehouseStorage.Remove(item.Identifier);
-            }
-            ItemListBox.Items.Remove(item);
+        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        {
+            Item itemToRemove = null;
 
-            _resultList.ForEach(i => ItemListBox.Items.Add(i.Title));
+            if (this.ItemListBox.SelectedIndex >= 0)
+            {
+                itemToRemove = _resultList[ItemListBox.SelectedIndex];
+                ItemListBox.Items.RemoveAt(ItemListBox.SelectedIndex);
+            }
+
+            warehouse.RemoveItems(itemToRemove);
         }
 
-        private void ViewCartButton_Click(object sender, RoutedEventArgs e) {
-            Console.WriteLine(ItemListBox.SelectedItem);
-        }
+
     }
 }
