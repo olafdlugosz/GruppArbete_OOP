@@ -49,7 +49,6 @@ namespace GruppArbete_OOP
                 int.TryParse(QuantityTextBox.Text, out int year); return year;
             }
         }
-        //TODO Handle exceptions of empty boxes.
         private string Type => ComboBox.SelectedItem.ToString();
 
         private void AddNewItemButton_Click(object sender, RoutedEventArgs e)
@@ -167,7 +166,6 @@ namespace GruppArbete_OOP
 
         private void AddToCartButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO - implement quantity subtraction.
             if (ItemListBox.SelectedIndex >= 0 && resultList[ItemListBox.SelectedIndex].Quantity > 0)
             {
                 Item itemToAddToCart = null;

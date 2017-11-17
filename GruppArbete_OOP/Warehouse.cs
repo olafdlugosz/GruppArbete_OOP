@@ -135,7 +135,7 @@ namespace GruppArbete_OOP
         }
         public void PrintToFile(Item item) { //PrintToFile() is polymorphic. Can be used with or without input parameters.
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            StreamWriter writer = new StreamWriter($"{filePath}\\{item.Title}.txt", false); //TODO find filepath generic for all desktops.
+            StreamWriter writer = new StreamWriter($"{filePath}\\{item.Title}.txt", false);
             writer.WriteLine(item.ToString());
             writer.Close();
             writer.Dispose();

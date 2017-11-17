@@ -9,6 +9,6 @@ namespace GruppArbete_OOP
     interface IPrintable
     {
         void PrintToScreen(); //Printling Function
-        void PrintToFile(); //TODO Fuck about with StreamWriter
+        void PrintToFile(); 
     }
 }
