@@ -36,7 +36,6 @@ namespace GruppArbete_OOP
             this.Quantity = Quantity;
             this.Type = Type;
         }
-        public virtual void ChangePrice(double Price) { }
 
         public override string ToString() {
             return "Title: " + Title + " " +
