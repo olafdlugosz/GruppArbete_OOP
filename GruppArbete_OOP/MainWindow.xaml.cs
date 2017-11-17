@@ -151,7 +151,26 @@ namespace GruppArbete_OOP
         {
             if (ItemListBox.SelectedIndex >= 0)
             {
-                Item itemToAddToCart = _resultList[ItemListBox.SelectedIndex];
+                Item itemToAddToCart = null;
+
+                if(_resultList[ItemListBox.SelectedIndex].Type == "Book")
+                {
+                    itemToAddToCart = new Book(_resultList[ItemListBox.SelectedIndex].Title,
+                    _resultList[ItemListBox.SelectedIndex].Price, 
+                    _resultList[ItemListBox.SelectedIndex].Quantity, 
+                    _resultList[ItemListBox.SelectedIndex].Type,
+                    _resultList[ItemListBox.SelectedIndex].Identifier);
+                }
+
+                else if (_resultList[ItemListBox.SelectedIndex].Type == "Film")
+                {
+                        itemToAddToCart = new Film(_resultList[ItemListBox.SelectedIndex].Title,
+                        _resultList[ItemListBox.SelectedIndex].Price,
+                        _resultList[ItemListBox.SelectedIndex].Quantity,
+                        _resultList[ItemListBox.SelectedIndex].Type,
+                        _resultList[ItemListBox.SelectedIndex].Identifier);
+                }
+
                 _cart.AddToCart(itemToAddToCart);
             }
         }
