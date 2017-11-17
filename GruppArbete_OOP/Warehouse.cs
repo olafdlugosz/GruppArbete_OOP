@@ -20,13 +20,17 @@ namespace GruppArbete_OOP
             WarehouseStorage = new Dictionary<Guid, Item>();
             BookList = new List<Book>();
             FilmList = new List<Film>();
-            FilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            FilePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop); //generic desktop filepath
         }
+        /// <summary>
+        /// Custom made Serializer. SaveData() is overloaded and can be used with different input parameters.
+        /// </summary>
+        /// <param name="WarehouseStorage">The main Warehouse Storage dictionary.</param>
         public void SaveData(Dictionary<Guid, Item> WarehouseStorage) {
             StreamWriter writer = new StreamWriter($"{FilePath}//WarehouseDatabase.dat", false);
             foreach (var item in WarehouseStorage) {
-                writer.WriteLine(item.Value.LineUpClassPropertiesForStreamReader());
-            }
+                writer.WriteLine(item.Value.LineUpClassPropertiesForStreamReader()); //<= writes a specifically formatted string for the Serializer.(See Item Class)
+            } 
             writer.Close();
             writer.Dispose();
         }
@@ -46,14 +50,17 @@ namespace GruppArbete_OOP
             writer.Close();
             writer.Dispose();
         }
-
+        /// <summary>
+        /// Our custom made Serializer. Streamreads specifically formatted strings via en While Loop.
+        /// The string is then divided at "," and the fields are then thrown into an array.
+        /// The values in the fields correspond to class properties and can therefore be used to create instances
+        /// of the corresponding objects. Objects are later added to their respective Lists and the main Dictionary.
+        /// </summary>
         public void LoadData() {
             StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.dat");
             string line;
             while ((line = reader.ReadLine()) != null) {
                 var fields = line.Split(new[] { ',' });
-
-                // ListBox.Items.Add;
                 if (fields[3] == "Book") {
                     WarehouseStorage.Add(Guid.Parse(fields[4]), new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
                     BookList.Add(new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
@@ -114,7 +121,9 @@ namespace GruppArbete_OOP
                     break;
             }
         }
-
+        /// <summary>
+        /// Overloaded methods to be used to print whole warehouse storage, a list of specific items or a single item.
+        /// </summary>
         public void PrintToFile() {
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             StreamWriter writer = new StreamWriter($"{filePath}//WarehouseStorage.txt", false);
@@ -124,7 +133,7 @@ namespace GruppArbete_OOP
             writer.Close();
             writer.Dispose();
         }
-        public void PrintToFile(List<Item> list) { //PrintToFile() is overloaded. Can be used with or without input parameters.
+        public void PrintToFile(List<Item> list) { 
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             StreamWriter writer = new StreamWriter($"{filePath}\\{list}.txt", false);
             foreach (var item in list) {
@@ -133,15 +142,17 @@ namespace GruppArbete_OOP
             writer.Close();
             writer.Dispose();
         }
-        public void PrintToFile(Item item) { //PrintToFile() is polymorphic. Can be used with or without input parameters.
+        public void PrintToFile(Item item) { 
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            StreamWriter writer = new StreamWriter($"{filePath}\\{item.Title}.txt", false);
+            StreamWriter writer = new StreamWriter($"{filePath}\\{item.Title}.txt", false); 
             writer.WriteLine(item.ToString());
             writer.Close();
             writer.Dispose();
         }
-
-        public void PrintToScreen() { //CAN BE USED AS A DELEGATE INSIDE CONSOLE WRITELINE METHOD!
+        /// <summary>
+        /// Overloaded methods mainly to be used as printlining functions to assist the developer.
+        /// </summary>
+        public void PrintToScreen() { 
             foreach (var item in WarehouseStorage) {
                 item.Value.ToString();
             }

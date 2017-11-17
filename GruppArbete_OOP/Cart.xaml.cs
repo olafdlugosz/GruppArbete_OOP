@@ -24,20 +24,16 @@ namespace GruppArbete_OOP
         private List<Item> _orderList = new List<Item>();
         private MainWindow _mainWindow;
 
-        public Cart(MainWindow mainWindow)
-        {
+        public Cart(MainWindow mainWindow) {
             this._mainWindow = mainWindow;
             InitializeComponent();
         }
 
-        public void AddToCart(Item item)
-        {
+        public void AddToCart(Item item) {
             item.Quantity = 0;
 
-            for (int i = 0; i < _orderList.Count; i++)
-            {
-                if (_orderList[i].Identifier == item.Identifier)
-                {
+            for (int i = 0; i < _orderList.Count; i++) {
+                if (_orderList[i].Identifier == item.Identifier) {
                     _orderList[i].Quantity++;
                     CartListBox.Items.Remove(_orderList[i]);
                     CartListBox.Items.Add(_orderList[i]);
@@ -51,35 +47,28 @@ namespace GruppArbete_OOP
 
         }
 
-        private void Print_Click(object sender, RoutedEventArgs e)
-        {
+        private void Print_Click(object sender, RoutedEventArgs e) {
             PrintDialog printDlg = new PrintDialog();
             printDlg.ShowDialog();
             printDlg.PrintVisual(CartListBox, "Cart Printing.");
         }
 
-        private void SaveToFile_Click(object sender, RoutedEventArgs e)
-        {
+        private void SaveToFile_Click(object sender, RoutedEventArgs e) {
             if (_orderList.Count == 0)
                 return;
-            else
-            {
-                SaveFileDialog saveList = new SaveFileDialog
-                {
+            else {
+                SaveFileDialog saveList = new SaveFileDialog {
                     Filter = " TXT-fil| *.txt",
                     Title = "Spara Plocklistan",
                     FileName = $"Plocklista - {DateTime.Now.ToString("yyyy.MM.dd kl. HH.mm")}"
                 };
-
-                if (saveList.ShowDialog() == true)
-                {
+                if (saveList.ShowDialog() == true) {
                     StreamWriter writer = new StreamWriter(saveList.OpenFile());
                     writer.WriteLine($"Plocklistan skapad den {DateTime.Now.ToString("yyyy.MM.dd kl. HH:mm")}", false);
                     writer.WriteLine("\n\n");
                     writer.WriteLine($"Varor att Plocka:");
 
-                    for (int i = 0; i < _orderList.Count; i++)
-                    {
+                    for (int i = 0; i < _orderList.Count; i++) {
                         writer.WriteLine(_orderList[i].ToString());
                     }
 
@@ -91,24 +80,19 @@ namespace GruppArbete_OOP
         }
 
 
-        private void RemoveFromCartButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void RemoveFromCartButton_Click(object sender, RoutedEventArgs e) {
 
-            if (CartListBox.SelectedIndex >= 0)
-            {
-                if (_orderList[CartListBox.SelectedIndex].Quantity > 1)
-                {
+            if (CartListBox.SelectedIndex >= 0) {
+                if (_orderList[CartListBox.SelectedIndex].Quantity > 1) {
                     AdjustItemsQuantity(_orderList[CartListBox.SelectedIndex]);
                     _orderList[CartListBox.SelectedIndex].Quantity--;
                     CartListBox.Items.Clear();
 
-                    foreach (var item in _orderList)
-                    {
+                    foreach (var item in _orderList) {
                         CartListBox.Items.Add(item);
                     }
                 }
-                else
-                {
+                else {
                     AdjustItemsQuantity(_orderList[CartListBox.SelectedIndex]);
                     _orderList.RemoveAt(CartListBox.SelectedIndex);
                     CartListBox.Items.RemoveAt(CartListBox.SelectedIndex);
@@ -116,26 +100,20 @@ namespace GruppArbete_OOP
             }
         }
 
-        private void AdjustItemsQuantity(Item item)
-        {
+        private void AdjustItemsQuantity(Item item) {
             _mainWindow.warehouse.WarehouseStorage[item.Identifier].Quantity++;
 
-            switch (item.Type)
-            {
-                case "Book":
-                    {
-                        for (int i = 0; i < _mainWindow.warehouse.BookList.Count; i++)
-                        {
+            switch (item.Type) {
+                case "Book": {
+                        for (int i = 0; i < _mainWindow.warehouse.BookList.Count; i++) {
                             if (_mainWindow.warehouse.BookList[i].Identifier == item.Identifier)
                                 _mainWindow.warehouse.BookList[i].Quantity++;
                         }
                     }
                     break;
 
-                case "Film":
-                    {
-                        for (int i = 0; i < _mainWindow.warehouse.FilmList.Count; i++)
-                        {
+                case "Film": {
+                        for (int i = 0; i < _mainWindow.warehouse.FilmList.Count; i++) {
                             if (_mainWindow.warehouse.FilmList[i].Identifier == item.Identifier)
                                 _mainWindow.warehouse.FilmList[i].Quantity++;
                         }
@@ -147,20 +125,16 @@ namespace GruppArbete_OOP
             }
         }
 
-        private void BackToWarehouseButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void BackToWarehouseButton_Click(object sender, RoutedEventArgs e) {
             _mainWindow.Show();
             this.Hide();
         }
 
-        private void ClearCartButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void ClearCartButton_Click(object sender, RoutedEventArgs e) {
             CartListBox.Items.Clear();
 
-            foreach (var item in _orderList)
-            {
-                while (item.Quantity > 0)
-                {
+            foreach (var item in _orderList) {
+                while (item.Quantity > 0) {
                     AdjustItemsQuantity(item);
                     item.Quantity--;
                 }
