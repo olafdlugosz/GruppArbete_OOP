@@ -130,9 +130,8 @@ namespace GruppArbete_OOP
                 itemToRemove = resultList[ItemListBox.SelectedIndex];
                 resultList.RemoveAt(ItemListBox.SelectedIndex);
                 ItemListBox.Items.RemoveAt(ItemListBox.SelectedIndex);
+                warehouse.RemoveItems(itemToRemove);
             }
-
-            warehouse.RemoveItems(itemToRemove);
         }
 
         private void ViewCartButton_Click(object sender, RoutedEventArgs e)

@@ -88,7 +88,7 @@ namespace GruppArbete_OOP
 
                         writer.Dispose();
                         writer.Close();
-                        Environment.Exit(0);
+                        CartListBox.Items.Clear();
                     }
                 }
             }
