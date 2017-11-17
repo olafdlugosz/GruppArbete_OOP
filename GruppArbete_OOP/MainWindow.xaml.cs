@@ -1,19 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Diagnostics;
-using System.Collections;
 
 namespace GruppArbete_OOP
 {
@@ -86,24 +74,24 @@ namespace GruppArbete_OOP
                 if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
                 MessageBox.Show("Saving successful!", "Saved!", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            }
+        }
             catch
             {
-                MessageBox.Show("A problem accured while saving data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("A problem occured while saving data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
-        }
+}
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e) {
             try {
                 warehouse.LoadData();
                 MessageBox.Show("Loading successful!", "Loaded!", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
+        }
             catch
             {
-                MessageBox.Show("A problem accured while loading data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+                MessageBox.Show("A problem occured while loading data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
 
             }
-        }
+}
 
         private void SearchButton_Click(object sender, RoutedEventArgs e) {
             if (ComboBox.SelectedItem == null)
@@ -153,7 +141,6 @@ namespace GruppArbete_OOP
             if (ItemListBox.SelectedIndex >= 0 && resultList[ItemListBox.SelectedIndex].Quantity > 0)
             {
                 Item itemToAddToCart = null;
-                resultList[ItemListBox.SelectedIndex].Quantity--;
 
                 if (resultList[ItemListBox.SelectedIndex].Type == "Book") {
                     itemToAddToCart = new Book(resultList[ItemListBox.SelectedIndex].Title,
@@ -171,6 +158,7 @@ namespace GruppArbete_OOP
                     resultList[ItemListBox.SelectedIndex].Identifier);
                 }
 
+                RemoveItemQuantity(itemToAddToCart);
                 _cart.AddToCart(itemToAddToCart);
                 ItemListBox.Items.Clear();
 
@@ -180,6 +168,11 @@ namespace GruppArbete_OOP
             }
             else
                 return;
+        }
+
+        private void RemoveItemQuantity(Item item)
+        {
+            warehouse.WarehouseStorage[item.Identifier].Quantity--;
         }
     }
 }

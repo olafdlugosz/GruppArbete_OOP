@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GruppArbete_OOP"
         mc:Ignorable="d"
-        Title="Warehouse" Height="400" Width="525">
+        Title="Warehouse" Height="400" Width="800">
     <StackPanel>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -31,19 +31,20 @@
             </StackPanel>
             <StackPanel Margin="40,10,10,10" VerticalAlignment="Center">
                 <TextBlock Text="Search results:" HorizontalAlignment="Center"/>
-                <ListBox x:Name="ItemListBox" Height="250" Width="200"/>
+                <ListBox x:Name="ItemListBox" Height="250" Width="500"/>
             </StackPanel>
         </StackPanel>
         <StackPanel Orientation="Horizontal" >
+            <StackPanel Width= "35"/>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Button x:Name="AddNewItemButton" Content="Add Item" Margin="5" FontSize="14" Width="65" Click="AddNewItemButton_Click"/>
-                <Button x:Name="RemoveButton" Content="Remove Item" Margin="5" FontSize="14" Width="90" Click="RemoveButton_Click"/>
                 <Button x:Name="SearchButton" Content="Search" Margin="5" FontSize="14" Width="48" Click="SearchButton_Click"/>
             </StackPanel>
-            <StackPanel Width= "23"/>
+            <StackPanel Width= "185"/>
             <StackPanel Orientation="Horizontal" Margin="10">
                 <Button x:Name="AddToCartButton" Content="Add to cart" Margin="5" FontSize="14" Width="80" Click="AddToCartButton_Click"/>
                 <Button x:Name="ViewCartButton" Content="View cart" Margin="5" FontSize="14" Width="70" Click="ViewCartButton_Click"/>
+                <Button x:Name="RemoveButton" Content="Remove Item" Margin="5" FontSize="14" Width="90" Click="RemoveButton_Click"/>
             </StackPanel>
         </StackPanel>
 

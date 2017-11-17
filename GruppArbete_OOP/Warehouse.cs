@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Windows.Controls;
 
@@ -57,6 +55,10 @@ namespace GruppArbete_OOP
         /// of the corresponding objects. Objects are later added to their respective Lists and the main Dictionary.
         /// </summary>
         public void LoadData() {
+            WarehouseStorage.Clear();
+            BookList.Clear();
+            FilmList.Clear();
+
             StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.dat");
             string line;
             while ((line = reader.ReadLine()) != null) {
