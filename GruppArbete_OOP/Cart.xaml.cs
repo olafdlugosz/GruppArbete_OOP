@@ -93,13 +93,15 @@ namespace GruppArbete_OOP
 
         private void RemoveFromCartButton_Click(object sender, RoutedEventArgs e)
         {
+
             if (CartListBox.SelectedIndex >= 0)
             {
                 if (_orderList[CartListBox.SelectedIndex].Quantity > 1)
                 {
+                    AdjustItemsQuantity();
                     _orderList[CartListBox.SelectedIndex].Quantity--;
                     CartListBox.Items.Clear();
-                    
+
                     foreach (var item in _orderList)
                     {
                         CartListBox.Items.Add(item);
@@ -107,9 +109,41 @@ namespace GruppArbete_OOP
                 }
                 else
                 {
+                    AdjustItemsQuantity();
                     _orderList.RemoveAt(CartListBox.SelectedIndex);
                     CartListBox.Items.RemoveAt(CartListBox.SelectedIndex);
                 }
+            }
+        }
+
+        private void AdjustItemsQuantity()
+        {
+            _mainWindow.warehouse.WarehouseStorage[_orderList[CartListBox.SelectedIndex].Identifier].Quantity++;
+
+            switch (_orderList[CartListBox.SelectedIndex].Type)
+            {
+                case "Book":
+                    {
+                        for (int i = 0; i < _mainWindow.warehouse.BookList.Count; i++)
+                        {
+                            if (_mainWindow.warehouse.BookList[i].Identifier == _orderList[CartListBox.SelectedIndex].Identifier)
+                                _mainWindow.warehouse.BookList[i].Quantity++;
+                        }
+                    }
+                    break;
+
+                case "Film":
+                    {
+                        for (int i = 0; i < _mainWindow.warehouse.FilmList.Count; i++)
+                        {
+                            if (_mainWindow.warehouse.FilmList[i].Identifier == _orderList[CartListBox.SelectedIndex].Identifier)
+                                _mainWindow.warehouse.FilmList[i].Quantity++;
+                        }
+                    }
+                    break;
+
+                default:
+                    break;
             }
         }
 

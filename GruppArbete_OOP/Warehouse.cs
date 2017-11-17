@@ -9,7 +9,7 @@ using System.Windows.Controls;
 namespace GruppArbete_OOP
 {
 
-    class Warehouse : IPrintable
+    public class Warehouse : IPrintable
     {
         public Dictionary<Guid, Item> WarehouseStorage;
         public List<Book> BookList;
