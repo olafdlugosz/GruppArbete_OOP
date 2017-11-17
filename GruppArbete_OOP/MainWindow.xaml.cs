@@ -23,7 +23,7 @@ namespace GruppArbete_OOP
     public partial class MainWindow : Window
     {
         private Warehouse _warehouse = new Warehouse();
-        private List<Item> _resultList;
+        public List<Item> resultList;
         private Cart _cart;
 
         public MainWindow()
@@ -104,11 +104,11 @@ namespace GruppArbete_OOP
             else
             {
                 ClearListBox();
-                _resultList = _warehouse.PerformSearch(_warehouse.CheckObjectType(ComboBox), 
+                resultList = _warehouse.PerformSearch(_warehouse.CheckObjectType(ComboBox), 
                     ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text, 
                     QuantityTextBox.Text, GuidTextBox.Text);
 
-                _resultList.ForEach(i => ItemListBox.Items.Add(i.Title));
+                resultList.ForEach(i => ItemListBox.Items.Add(i.Title));
             }
         }
 
@@ -133,8 +133,8 @@ namespace GruppArbete_OOP
 
             if (ItemListBox.SelectedIndex >= 0)
             {
-                itemToRemove = _resultList[ItemListBox.SelectedIndex];
-                _resultList.RemoveAt(ItemListBox.SelectedIndex);
+                itemToRemove = resultList[ItemListBox.SelectedIndex];
+                resultList.RemoveAt(ItemListBox.SelectedIndex);
                 ItemListBox.Items.RemoveAt(ItemListBox.SelectedIndex);
             }
 
@@ -150,30 +150,39 @@ namespace GruppArbete_OOP
         private void AddToCartButton_Click(object sender, RoutedEventArgs e)
         {
             //TODO - implement quantity subtraction.
-            if (ItemListBox.SelectedIndex >= 0)
+            if (ItemListBox.SelectedIndex >= 0 && resultList[ItemListBox.SelectedIndex].Quantity > 0)
             {
                 Item itemToAddToCart = null;
+                resultList[ItemListBox.SelectedIndex].Quantity--;
 
-                if(_resultList[ItemListBox.SelectedIndex].Type == "Book")
+                if (resultList[ItemListBox.SelectedIndex].Type == "Book")
                 {
-                    itemToAddToCart = new Book(_resultList[ItemListBox.SelectedIndex].Title,
-                    _resultList[ItemListBox.SelectedIndex].Price, 
-                    _resultList[ItemListBox.SelectedIndex].Quantity, 
-                    _resultList[ItemListBox.SelectedIndex].Type,
-                    _resultList[ItemListBox.SelectedIndex].Identifier);
+                    itemToAddToCart = new Book(resultList[ItemListBox.SelectedIndex].Title,
+                    resultList[ItemListBox.SelectedIndex].Price,
+                    resultList[ItemListBox.SelectedIndex].Quantity,
+                    resultList[ItemListBox.SelectedIndex].Type,
+                    resultList[ItemListBox.SelectedIndex].Identifier);
                 }
 
-                else if (_resultList[ItemListBox.SelectedIndex].Type == "Film")
+                else if (resultList[ItemListBox.SelectedIndex].Type == "Film")
                 {
-                        itemToAddToCart = new Film(_resultList[ItemListBox.SelectedIndex].Title,
-                        _resultList[ItemListBox.SelectedIndex].Price,
-                        _resultList[ItemListBox.SelectedIndex].Quantity,
-                        _resultList[ItemListBox.SelectedIndex].Type,
-                        _resultList[ItemListBox.SelectedIndex].Identifier);
+                    itemToAddToCart = new Film(resultList[ItemListBox.SelectedIndex].Title,
+                    resultList[ItemListBox.SelectedIndex].Price,
+                    resultList[ItemListBox.SelectedIndex].Quantity,
+                    resultList[ItemListBox.SelectedIndex].Type,
+                    resultList[ItemListBox.SelectedIndex].Identifier);
                 }
 
                 _cart.AddToCart(itemToAddToCart);
+                ItemListBox.Items.Clear();
+
+                foreach (var item in resultList)
+                {
+                    ItemListBox.Items.Add(item);
+                }
             }
+            else
+                return;
         }
     }
 }
