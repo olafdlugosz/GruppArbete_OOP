@@ -64,11 +64,11 @@ namespace GruppArbete_OOP
             while ((line = reader.ReadLine()) != null) {
                 var fields = line.Split(new[] { ',' });
                 if (fields[3] == "Book") {
-                    WarehouseStorage.Add(Guid.Parse(fields[4]), new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
+                    WarehouseStorage.Add(Guid.Parse(fields[4]), new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
                     BookList.Add(new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
                 }
                 if (fields[3] == "Film") {
-                    WarehouseStorage.Add(Guid.Parse(fields[4]), new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
+                    WarehouseStorage.Add(Guid.Parse(fields[4]), new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
                     FilmList.Add(new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
 
                 }
@@ -122,6 +122,26 @@ namespace GruppArbete_OOP
                 default:
                     break;
             }
+        }
+
+        public Item AddItems(string title, int price, int quantity, string type)
+        {
+            if (type == "Book")
+            {
+                Book book = new Book(title, price, quantity, type);
+                WarehouseStorage.Add(book.Identifier, book);
+                BookList.Add(book);
+                return book as Item;
+            }
+            else if (type == "Film")
+            {
+                Film film = new Film(title, price, quantity, type);
+                WarehouseStorage.Add(film.Identifier, film);
+                FilmList.Add(film);
+                return film as Item;
+            }
+
+            return null;
         }
         /// <summary>
         /// Overloaded methods to be used to print whole warehouse storage, a list of specific items or a single item.
