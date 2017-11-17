@@ -149,6 +149,7 @@ namespace GruppArbete_OOP
 
         private void AddToCartButton_Click(object sender, RoutedEventArgs e)
         {
+            //TODO - implement quantity subtraction.
             if (ItemListBox.SelectedIndex >= 0)
             {
                 Item itemToAddToCart = null;
