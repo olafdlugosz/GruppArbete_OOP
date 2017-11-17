@@ -23,7 +23,7 @@ namespace GruppArbete_OOP
     public partial class MainWindow : Window
     {
         public Warehouse warehouse = new Warehouse();
-        public List<Item> resultList;
+        public List<Item> resultList = new List<Item>();
         private Cart _cart;
 
         public MainWindow()
@@ -58,14 +58,16 @@ namespace GruppArbete_OOP
                 Book book = new Book(Title, Price, Quantity, Type);
                 warehouse.WarehouseStorage.Add(book.Identifier, book);
                 warehouse.BookList.Add(book);
-                ItemListBox.Items.Add(book.Title);
+                ItemListBox.Items.Add(book);
+                resultList.Add(book as Item);
             }
             if (Type == "Film")
             {
                 Film film = new Film(Title, Price, Quantity, Type);
                 warehouse.WarehouseStorage.Add(film.Identifier, film);
                 warehouse.FilmList.Add(film);
-                ItemListBox.Items.Add(film.Title);
+                ItemListBox.Items.Add(film);
+                resultList.Add(film as Item);
             }
             //Printling Function
             foreach (var item in warehouse.WarehouseStorage)
