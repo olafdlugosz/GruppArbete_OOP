@@ -9,7 +9,7 @@ using System.Windows.Controls;
 namespace GruppArbete_OOP
 {
 
-    class Warehouse : IPrintable
+    public class Warehouse : IPrintable
     {
         public Dictionary<Guid, Item> WarehouseStorage;
         public List<Book> BookList;
@@ -56,7 +56,7 @@ namespace GruppArbete_OOP
                 // ListBox.Items.Add;
                 if (fields[3] == "Book") {
                     WarehouseStorage.Add(Guid.Parse(fields[4]), new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
-                    BookList.Add(new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
+                    BookList.Add(new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
                 }
                 if (fields[3] == "Film") {
                     WarehouseStorage.Add(Guid.Parse(fields[4]), new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));

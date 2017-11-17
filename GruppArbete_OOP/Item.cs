@@ -61,7 +61,7 @@ namespace GruppArbete_OOP
             return this.Price - item.Price;
         }
     }
-    class Book : Item
+    public class Book : Item
     {
         public Book(string Title, int Price, int Quantity, string Type) : base(Title, Price, Quantity, Type) {
         }
@@ -69,7 +69,7 @@ namespace GruppArbete_OOP
         public Book(string Title, int Price, int Quantity, string Type, Guid Identifier) : base(Title, Price, Quantity, Type, Identifier) {
         }
     }
-    class Film : Item
+    public class Film : Item
     {
         public Film(string Title, int Price, int Quantity, string Type) : base(Title, Price, Quantity, Type) {
         }

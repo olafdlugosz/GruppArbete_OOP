@@ -22,7 +22,7 @@ namespace GruppArbete_OOP
     /// </summary>
     public partial class MainWindow : Window
     {
-        private Warehouse _warehouse = new Warehouse();
+        public Warehouse warehouse = new Warehouse();
         public List<Item> resultList;
         private Cart _cart;
 
@@ -71,7 +71,7 @@ namespace GruppArbete_OOP
 
             }
             //Printling Function
-            foreach (var item in _warehouse.WarehouseStorage)
+            foreach (var item in warehouse.WarehouseStorage)
             {
                 Console.WriteLine(item.Value.ToString());
             }
@@ -89,14 +89,29 @@ namespace GruppArbete_OOP
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            _warehouse.SaveData(_warehouse.WarehouseStorage);
-            if (_warehouse.BookList.Count != 0) { _warehouse.SaveData(_warehouse.BookList); };
-            if (_warehouse.FilmList.Count != 0) { _warehouse.SaveData(_warehouse.FilmList); };
+            try
+            {
+                warehouse.SaveData(warehouse.WarehouseStorage);
+                if (warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
+                if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
+            }
+            catch
+            {
+                MessageBox.Show("A problem accured while saving data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            _warehouse.LoadData();
+            try
+            {
+                warehouse.LoadData();
+            }
+            catch
+            {
+                MessageBox.Show("A problem accured while loading data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -106,11 +121,11 @@ namespace GruppArbete_OOP
             else
             {
                 ClearListBox();
-                resultList = _warehouse.PerformSearch(_warehouse.CheckObjectType(ComboBox), 
-                    ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text, 
+                resultList = warehouse.PerformSearch(warehouse.CheckObjectType(ComboBox),
+                    ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text,
                     QuantityTextBox.Text, GuidTextBox.Text);
 
-                resultList.ForEach(i => ItemListBox.Items.Add(i.Title));
+                resultList.ForEach(i => ItemListBox.Items.Add(i));
             }
         }
 
@@ -140,11 +155,13 @@ namespace GruppArbete_OOP
                 ItemListBox.Items.RemoveAt(ItemListBox.SelectedIndex);
             }
 
-            _warehouse.RemoveItems(itemToRemove);
+            warehouse.RemoveItems(itemToRemove);
         }
 
         private void ViewCartButton_Click(object sender, RoutedEventArgs e)
         {
+            ClearTextBoxes();
+            ClearListBox();
             _cart.Show();
             this.Hide();
         }
