@@ -51,7 +51,8 @@ namespace GruppArbete_OOP
         /// </summary>
         /// <returns></returns>
         public override string ToString() {
-            return "Title: " + Title + " " +
+            return "Type: " + Type + " " + 
+                "Title: " + Title + " " +
                 "GUID: " + Identifier + " " +
                 "Price: " + Price + "kr" + " " +
                 "Quantity: " + Quantity + " ";
