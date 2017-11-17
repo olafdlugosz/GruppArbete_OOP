@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GruppArbete_OOP
 {
-    public abstract class Item : ITradable, IComparable
+    public abstract class Item : IComparable
     {
         private string _title { get; set; }
         private Guid _identifier { get; set; }
@@ -36,20 +36,12 @@ namespace GruppArbete_OOP
             this.Quantity = Quantity;
             this.Type = Type;
         }
-        public virtual void ChangePrice(double Price) { }
 
         public override string ToString() {
             return "Title: " + Title + " " +
                 "GUID: " + Identifier + " " +
                 "Price: " + Price + "kr" + " " +
                 "Quantity: " + Quantity + " ";
-        }
-        public void Sell(int Quantity, int Price) {
-            if(Quantity != 0) { Quantity--; } //TODO link to messagebox. Write "You sold this item for + Price + 0:C! 
-        }
-        public void Restock(int Quantity) {
-            Quantity++;
-            //TODO Place under the same event handler as List.Add()
         }
         public string LineUpClassPropertiesForStreamReader() {
             return String.Format($"{Title},{Price},{Quantity},{Type},{Identifier}");

@@ -49,7 +49,6 @@ namespace GruppArbete_OOP
                 int.TryParse(QuantityTextBox.Text, out int year); return year;
             }
         }
-        //TODO Handle exceptions of empty boxes.
         private string Type => ComboBox.SelectedItem.ToString();
         private void AddNewItemButton_Click(object sender, RoutedEventArgs e)
         {
@@ -94,6 +93,8 @@ namespace GruppArbete_OOP
                 warehouse.SaveData(warehouse.WarehouseStorage);
                 if (warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
                 if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
+                MessageBox.Show("Saving successful!", "Saved!", MessageBoxButton.OK, MessageBoxImage.Information);
+
             }
             catch
             {
@@ -106,6 +107,7 @@ namespace GruppArbete_OOP
             try
             {
                 warehouse.LoadData();
+                MessageBox.Show("Loading successful!", "Loaded!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch
             {
@@ -168,7 +170,6 @@ namespace GruppArbete_OOP
 
         private void AddToCartButton_Click(object sender, RoutedEventArgs e)
         {
-            //TODO - implement quantity subtraction.
             if (ItemListBox.SelectedIndex >= 0 && resultList[ItemListBox.SelectedIndex].Quantity > 0)
             {
                 Item itemToAddToCart = null;
