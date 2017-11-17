@@ -46,6 +46,10 @@ namespace GruppArbete_OOP
         }
 
         public void LoadData() {
+            WarehouseStorage.Clear();
+            BookList.Clear();
+            FilmList.Clear();
+
             StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.dat");
             string line;
             while ((line = reader.ReadLine()) != null) {

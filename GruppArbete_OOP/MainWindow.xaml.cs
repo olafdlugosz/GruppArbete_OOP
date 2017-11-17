@@ -73,32 +73,32 @@ namespace GruppArbete_OOP
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 warehouse.SaveData(warehouse.WarehouseStorage);
                 if (warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
                 if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
                 MessageBox.Show("Saving successful!", "Saved!", MessageBoxButton.OK, MessageBoxImage.Information);
 
-            }
-            catch
-            {
-                MessageBox.Show("A problem accured while saving data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
-            }
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("A problem occured while saving data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 warehouse.LoadData();
                 MessageBox.Show("Loading successful!", "Loaded!", MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            catch
-            {
-                MessageBox.Show("A problem accured while loading data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            //}
+            //catch
+            //{
+            //    MessageBox.Show("A problem occured while loading data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
 
-            }
+            //}
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
