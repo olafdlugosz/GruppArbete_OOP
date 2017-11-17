@@ -123,6 +123,26 @@ namespace GruppArbete_OOP
                     break;
             }
         }
+
+        public Item AddItems(string title, int price, int quantity, string type)
+        {
+            if (type == "Book")
+            {
+                Book book = new Book(title, price, quantity, type);
+                WarehouseStorage.Add(book.Identifier, book);
+                BookList.Add(book);
+                return book as Item;
+            }
+            else if (type == "Film")
+            {
+                Film film = new Film(title, price, quantity, type);
+                WarehouseStorage.Add(film.Identifier, film);
+                FilmList.Add(film);
+                return film as Item;
+            }
+
+            return null;
+        }
         /// <summary>
         /// Overloaded methods to be used to print whole warehouse storage, a list of specific items or a single item.
         /// </summary>
