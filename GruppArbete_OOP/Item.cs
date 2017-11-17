@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GruppArbete_OOP
 {
-    public abstract class Item : ITradable, IComparable
+    public abstract class Item : IComparable
     {
         private string _title { get; set; }
         private Guid _identifier { get; set; }
@@ -20,37 +20,50 @@ namespace GruppArbete_OOP
         public string Type { get => _type; set => _type = value; }
         public int Price { get => _price; set => _price = value; }
         public int Quantity { get => _quantity; set => _quantity = value; }
-
+        /// <summary>
+        /// Constructor for creating new items
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="Price"></param>
+        /// <param name="Quantity"></param>
+        /// <param name="Type"></param>
         public Item(string Title, int Price, int Quantity,string Type) {
 
-            Identifier = Guid.NewGuid();
+            Identifier = Guid.NewGuid(); // <= creates a new Guid.
             this.Title = Title;
             this.Price = Price;
             this.Quantity = Quantity;
             this.Type = Type;
         }
-        public Item(string Title, int Price, int Quantity, string Type, Guid Identifier) {
+        /// <summary>
+        /// 2nd Constructor to be used when loading from a saved .dat file
+        /// </summary>
+        /// <param name="Title"></param>
+        /// <param name="Price"></param>
+        /// <param name="Quantity"></param>
+        /// <param name="Type"></param>
+        /// <param name="Identifier">GUID</param>
+        public Item(string Title, int Price, int Quantity, string Type, Guid Identifier) { // <= uses Guid from the saved .dat
             this.Identifier = Identifier;
             this.Title = Title;
             this.Price = Price;
             this.Quantity = Quantity;
             this.Type = Type;
         }
-        public virtual void ChangePrice(double Price) { }
-
+        /// <summary>
+        /// Overrides base method to better suit out purposes.
+        /// </summary>
+        /// <returns></returns>
         public override string ToString() {
             return "Title: " + Title + " " +
                 "GUID: " + Identifier + " " +
                 "Price: " + Price + "kr" + " " +
                 "Quantity: " + Quantity + " ";
         }
-        public void Sell(int Quantity, int Price) {
-            if(Quantity != 0) { Quantity--; } //TODO link to messagebox. Write "You sold this item for + Price + 0:C! 
-        }
-        public void Restock(int Quantity) {
-            Quantity++;
-            //TODO Place under the same event handler as List.Add()
-        }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public string LineUpClassPropertiesForStreamReader() {
             return String.Format($"{Title},{Price},{Quantity},{Type},{Identifier}");
         }

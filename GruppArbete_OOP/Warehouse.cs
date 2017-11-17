@@ -52,8 +52,6 @@ namespace GruppArbete_OOP
             string line;
             while ((line = reader.ReadLine()) != null) {
                 var fields = line.Split(new[] { ',' });
-
-                // ListBox.Items.Add;
                 if (fields[3] == "Book") {
                     WarehouseStorage.Add(Guid.Parse(fields[4]), new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3]));
                     BookList.Add(new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
@@ -114,7 +112,6 @@ namespace GruppArbete_OOP
                     break;
             }
         }
-
         public void PrintToFile() {
             string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             StreamWriter writer = new StreamWriter($"{filePath}//WarehouseStorage.txt", false);
