@@ -56,14 +56,14 @@ namespace GruppArbete_OOP
             try {
                 if (Type == "Book") {
                     Book book = new Book(Title, Price, Quantity, Type);
-                    _warehouse.WarehouseStorage.Add(book.Identifier, book);
-                    _warehouse.BookList.Add(book);
+                    warehouse.WarehouseStorage.Add(book.Identifier, book);
+                    warehouse.BookList.Add(book);
                     ItemListBox.Items.Add(book.Title);
                 }
                 else if (Type == "Film") {
                     Film film = new Film(Title, Price, Quantity, Type);
-                    _warehouse.WarehouseStorage.Add(film.Identifier, film);
-                    _warehouse.FilmList.Add(film);
+                    warehouse.WarehouseStorage.Add(film.Identifier, film);
+                    warehouse.FilmList.Add(film);
                     ItemListBox.Items.Add(film.Title);
                 }
             } catch (Exception) {
