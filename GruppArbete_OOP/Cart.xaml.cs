@@ -99,7 +99,7 @@ namespace GruppArbete_OOP
                 {
                     _orderList[CartListBox.SelectedIndex].Quantity--;
                     CartListBox.Items.Clear();
-
+                    
                     foreach (var item in _orderList)
                     {
                         CartListBox.Items.Add(item);
