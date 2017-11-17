@@ -61,13 +61,17 @@ namespace GruppArbete_OOP
                 "Quantity: " + Quantity + " ";
         }
         /// <summary>
-        /// 
+        /// Formatted string to be used in our custom made Serializer.
         /// </summary>
         /// <returns></returns>
         public string LineUpClassPropertiesForStreamReader() {
             return String.Format($"{Title},{Price},{Quantity},{Type},{Identifier}");
         }
-
+        /// <summary>
+        /// Method from inherited interface to be used together with LINQ
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
         public int CompareTo(object obj)
         {
             Item item = obj as Item;
