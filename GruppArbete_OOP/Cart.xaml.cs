@@ -40,11 +40,14 @@ namespace GruppArbete_OOP
 
         private void Print_Click(object sender, RoutedEventArgs e) {
             PrintDialog printDlg = new PrintDialog();
-            printDlg.ShowDialog();
 
             bool? print = printDlg.ShowDialog();
             if (print == true)
-                printDlg.PrintVisual(CartListBox, "Cart Printing.");
+            {
+                printDlg.PrintVisual(CartListBox, "Printing Order");
+                CartListBox.Items.Clear();
+            }
+
         }
 
         private void SaveToFile_Click(object sender, RoutedEventArgs e) {
