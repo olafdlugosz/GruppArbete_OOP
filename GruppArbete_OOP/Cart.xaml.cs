@@ -98,7 +98,7 @@ namespace GruppArbete_OOP
             {
                 if (_orderList[CartListBox.SelectedIndex].Quantity > 1)
                 {
-                    AdjustItemsQuantity();
+                    AdjustItemsQuantity(_orderList[CartListBox.SelectedIndex]);
                     _orderList[CartListBox.SelectedIndex].Quantity--;
                     CartListBox.Items.Clear();
 
@@ -109,24 +109,24 @@ namespace GruppArbete_OOP
                 }
                 else
                 {
-                    AdjustItemsQuantity();
+                    AdjustItemsQuantity(_orderList[CartListBox.SelectedIndex]);
                     _orderList.RemoveAt(CartListBox.SelectedIndex);
                     CartListBox.Items.RemoveAt(CartListBox.SelectedIndex);
                 }
             }
         }
 
-        private void AdjustItemsQuantity()
+        private void AdjustItemsQuantity(Item item)
         {
-            _mainWindow.warehouse.WarehouseStorage[_orderList[CartListBox.SelectedIndex].Identifier].Quantity++;
+            _mainWindow.warehouse.WarehouseStorage[item.Identifier].Quantity++;
 
-            switch (_orderList[CartListBox.SelectedIndex].Type)
+            switch (item.Type)
             {
                 case "Book":
                     {
                         for (int i = 0; i < _mainWindow.warehouse.BookList.Count; i++)
                         {
-                            if (_mainWindow.warehouse.BookList[i].Identifier == _orderList[CartListBox.SelectedIndex].Identifier)
+                            if (_mainWindow.warehouse.BookList[i].Identifier == item.Identifier)
                                 _mainWindow.warehouse.BookList[i].Quantity++;
                         }
                     }
@@ -136,7 +136,7 @@ namespace GruppArbete_OOP
                     {
                         for (int i = 0; i < _mainWindow.warehouse.FilmList.Count; i++)
                         {
-                            if (_mainWindow.warehouse.FilmList[i].Identifier == _orderList[CartListBox.SelectedIndex].Identifier)
+                            if (_mainWindow.warehouse.FilmList[i].Identifier == item.Identifier)
                                 _mainWindow.warehouse.FilmList[i].Quantity++;
                         }
                     }
@@ -156,6 +156,15 @@ namespace GruppArbete_OOP
         private void ClearCartButton_Click(object sender, RoutedEventArgs e)
         {
             CartListBox.Items.Clear();
+
+            foreach (var item in _orderList)
+            {
+                while (item.Quantity > 0)
+                {
+                    AdjustItemsQuantity(item);
+                    item.Quantity--;
+                }
+            }
             _orderList.Clear();
         }
     }

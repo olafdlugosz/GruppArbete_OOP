@@ -50,7 +50,7 @@ namespace GruppArbete_OOP
             }
         }
         //TODO Handle exceptions of empty boxes.
-        private string Type => ComboBox.SelectedItem.ToString(); 
+        private string Type => ComboBox.SelectedItem.ToString();
 
         private void AddNewItemButton_Click(object sender, RoutedEventArgs e)
         {
@@ -88,14 +88,29 @@ namespace GruppArbete_OOP
 
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            warehouse.SaveData(warehouse.WarehouseStorage);
-            if (warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
-            if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
+            try
+            {
+                warehouse.SaveData(warehouse.WarehouseStorage);
+                if (warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
+                if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
+            }
+            catch
+            {
+                MessageBox.Show("A problem accured while saving data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            warehouse.LoadData();
+            try
+            {
+                warehouse.LoadData();
+            }
+            catch
+            {
+                MessageBox.Show("A problem accured while loading data!", "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
+
+            }
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
@@ -105,8 +120,8 @@ namespace GruppArbete_OOP
             else
             {
                 ClearListBox();
-                resultList = warehouse.PerformSearch(warehouse.CheckObjectType(ComboBox), 
-                    ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text, 
+                resultList = warehouse.PerformSearch(warehouse.CheckObjectType(ComboBox),
+                    ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text,
                     QuantityTextBox.Text, GuidTextBox.Text);
 
                 resultList.ForEach(i => ItemListBox.Items.Add(i));
