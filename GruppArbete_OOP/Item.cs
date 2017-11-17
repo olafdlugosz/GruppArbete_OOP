@@ -54,7 +54,7 @@ namespace GruppArbete_OOP
             return "Type: " + Type + " " + 
                 "Title: " + Title + " " +
                 "GUID: " + Identifier + " " +
-                "Price: " + Price + "kr" + " " +
+                "Price: " + Price + " kr" + " " +
                 "Quantity: " + Quantity + " ";
         }
         /// <summary>
