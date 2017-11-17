@@ -50,29 +50,31 @@ namespace GruppArbete_OOP
             }
         }
         //TODO Handle exceptions of empty boxes.
-        private string Type => ComboBox.SelectedItem.ToString(); 
+        private string Type => ComboBox.SelectedItem.ToString();
         private void AddNewItemButton_Click(object sender, RoutedEventArgs e)
         {
-            if (Type == "Book")
-            {
-                Book book = new Book(Title, Price, Quantity, Type);
-                _warehouse.WarehouseStorage.Add(book.Identifier, book);
-                _warehouse.BookList.Add(book);
-                ItemListBox.Items.Add(book.Title);
-            }
-            if (Type == "Film")
-            {
-                Film film = new Film(Title, Price, Quantity, Type);
-                _warehouse.WarehouseStorage.Add(film.Identifier, film);
-                _warehouse.FilmList.Add(film);
-                ItemListBox.Items.Add(film.Title);
+            try {
+                if (Type == "Book") {
+                    Book book = new Book(Title, Price, Quantity, Type);
+                    _warehouse.WarehouseStorage.Add(book.Identifier, book);
+                    _warehouse.BookList.Add(book);
+                    ItemListBox.Items.Add(book.Title);
+                }
+                else if (Type == "Film") {
+                    Film film = new Film(Title, Price, Quantity, Type);
+                    _warehouse.WarehouseStorage.Add(film.Identifier, film);
+                    _warehouse.FilmList.Add(film);
+                    ItemListBox.Items.Add(film.Title);
+                }
+            } catch (Exception) {
+                MessageBox.Show("You must choose item in combobox!", "Warning", MessageBoxButton.OK, MessageBoxImage.Warning);
+
             }
             //Printling Function
             foreach (var item in _warehouse.WarehouseStorage)
             {
                 Console.WriteLine(item.Value.ToString());
             }
-
             ClearTextBoxes();
         }
 
