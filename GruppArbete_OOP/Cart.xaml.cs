@@ -2,17 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace GruppArbete_OOP
 {
@@ -98,7 +89,7 @@ namespace GruppArbete_OOP
             {
                 if (_orderList[CartListBox.SelectedIndex].Quantity > 1)
                 {
-                    AdjustItemsQuantity(_orderList[CartListBox.SelectedIndex]);
+                    AddItemQuantity(_orderList[CartListBox.SelectedIndex]);
                     _orderList[CartListBox.SelectedIndex].Quantity--;
                     CartListBox.Items.Clear();
 
@@ -109,42 +100,16 @@ namespace GruppArbete_OOP
                 }
                 else
                 {
-                    AdjustItemsQuantity(_orderList[CartListBox.SelectedIndex]);
+                    AddItemQuantity(_orderList[CartListBox.SelectedIndex]);
                     _orderList.RemoveAt(CartListBox.SelectedIndex);
                     CartListBox.Items.RemoveAt(CartListBox.SelectedIndex);
                 }
             }
         }
 
-        private void AdjustItemsQuantity(Item item)
+        private void AddItemQuantity(Item item)
         {
             _mainWindow.warehouse.WarehouseStorage[item.Identifier].Quantity++;
-
-            switch (item.Type)
-            {
-                case "Book":
-                    {
-                        for (int i = 0; i < _mainWindow.warehouse.BookList.Count; i++)
-                        {
-                            if (_mainWindow.warehouse.BookList[i].Identifier == item.Identifier)
-                                _mainWindow.warehouse.BookList[i].Quantity++;
-                        }
-                    }
-                    break;
-
-                case "Film":
-                    {
-                        for (int i = 0; i < _mainWindow.warehouse.FilmList.Count; i++)
-                        {
-                            if (_mainWindow.warehouse.FilmList[i].Identifier == item.Identifier)
-                                _mainWindow.warehouse.FilmList[i].Quantity++;
-                        }
-                    }
-                    break;
-
-                default:
-                    break;
-            }
         }
 
         private void BackToWarehouseButton_Click(object sender, RoutedEventArgs e)
@@ -161,7 +126,7 @@ namespace GruppArbete_OOP
             {
                 while (item.Quantity > 0)
                 {
-                    AdjustItemsQuantity(item);
+                    AddItemQuantity(item);
                     item.Quantity--;
                 }
             }

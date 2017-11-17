@@ -1,19 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using System.Diagnostics;
-using System.Collections;
 
 namespace GruppArbete_OOP
 {
@@ -58,16 +46,12 @@ namespace GruppArbete_OOP
                 Book book = new Book(Title, Price, Quantity, Type);
                 warehouse.WarehouseStorage.Add(book.Identifier, book);
                 warehouse.BookList.Add(book);
-                ItemListBox.Items.Add(book);
-                resultList.Add(book as Item);
             }
             if (Type == "Film")
             {
                 Film film = new Film(Title, Price, Quantity, Type);
                 warehouse.WarehouseStorage.Add(film.Identifier, film);
                 warehouse.FilmList.Add(film);
-                ItemListBox.Items.Add(film);
-                resultList.Add(film as Item);
             }
             //Printling Function
             foreach (var item in warehouse.WarehouseStorage)
@@ -174,7 +158,6 @@ namespace GruppArbete_OOP
             if (ItemListBox.SelectedIndex >= 0 && resultList[ItemListBox.SelectedIndex].Quantity > 0)
             {
                 Item itemToAddToCart = null;
-                resultList[ItemListBox.SelectedIndex].Quantity--;
 
                 if (resultList[ItemListBox.SelectedIndex].Type == "Book")
                 {
@@ -194,6 +177,7 @@ namespace GruppArbete_OOP
                     resultList[ItemListBox.SelectedIndex].Identifier);
                 }
 
+                RemoveItemQuantity(itemToAddToCart);
                 _cart.AddToCart(itemToAddToCart);
                 ItemListBox.Items.Clear();
 
@@ -204,6 +188,11 @@ namespace GruppArbete_OOP
             }
             else
                 return;
+        }
+
+        private void RemoveItemQuantity(Item item)
+        {
+            warehouse.WarehouseStorage[item.Identifier].Quantity--;
         }
     }
 }

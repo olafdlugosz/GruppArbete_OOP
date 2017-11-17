@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GruppArbete_OOP"
         mc:Ignorable="d"
-        Title="Cart" Height="310" Width="400">
+        Title="Cart" Height="310" Width="600">
     <StackPanel>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
@@ -16,7 +16,7 @@
             </Menu>
         </DockPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-            <ListBox x:Name="CartListBox" Height="200" Width="340" Margin="10"/>
+            <ListBox x:Name="CartListBox" Height="200" Width="500" Margin="10"/>
         </StackPanel>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
             <Button x:Name="BackToWarehouseButton" Content="Back to Warehouse" Margin="5" FontSize="14" Width="130" Click="BackToWarehouseButton_Click"/>
