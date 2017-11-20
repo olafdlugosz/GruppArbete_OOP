@@ -71,8 +71,15 @@ namespace GruppArbete_OOP
         /// <returns></returns>
         public int CompareTo(object obj)
         {
-            Item item = obj as Item; //TODO There might be a null exception if object is not an Item. HANDLE EXCEPTION by throwing a custom Exception!
-            return this.Price - item.Price; 
+            try
+            {
+            Item item = obj as Item; //TODO There might be a null exception if object is not an Item. HANDLE EXCEPTION by throwing a custom Exception! - DONE! WITH InvalidCastException :)
+                return this.Price - item.Price; 
+            }
+            catch
+            {
+                throw new InvalidCastException();
+            }
         }
     }
     public class Book : Item
