@@ -85,8 +85,7 @@ namespace GruppArbete_OOP
         }
 
         public List<Item> PerformSearch(List<Item> searchList, object type, string name, string price, string quantity, string guid) {
-            // TODO: use a single where clause with multiple conditions inside. Its more efficient.
-            // DONE!
+            // TODO: use a single where clause with multiple conditions inside. Its more efficient. - DONE!
             var resultList = searchList
                 .Where(item => item.Type.ToLower().Contains(type.ToString().ToLower()) 
                 && item.Title.ToLower().Contains(name.ToLower()) 
