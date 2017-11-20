@@ -15,20 +15,16 @@ namespace GruppArbete_OOP
         private List<Item> _orderList = new List<Item>();
         private MainWindow _mainWindow;
 
-        public Cart(MainWindow mainWindow)
-        {
+        public Cart(MainWindow mainWindow) {
             this._mainWindow = mainWindow;
             InitializeComponent();
         }
 
-        public void AddToCart(Item item)
-        {
+        public void AddToCart(Item item) {
             item.Quantity = 0;
-
-            for (int i = 0; i < _orderList.Count; i++)
-            {
-                if (_orderList[i].Identifier == item.Identifier)
-                {
+            //TODO You can use LINQ here too. 
+            for (int i = 0; i < _orderList.Count; i++) {
+                if (_orderList[i].Identifier == item.Identifier) {
                     _orderList[i].Quantity++;
                     CartListBox.Items.Remove(_orderList[i]);
                     CartListBox.Items.Add(_orderList[i]);
@@ -42,47 +38,36 @@ namespace GruppArbete_OOP
 
         }
 
-        private void Print_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
+        private void Print_Click(object sender, RoutedEventArgs e) {
+            try {
                 PrintDialog printDlg = new PrintDialog();
                 bool? print = printDlg.ShowDialog();
-                if (print == true)
-                {
+                if (print == true) {
                     printDlg.PrintVisual(CartListBox, "Printing Order");
                     CartListBox.Items.Clear();
                 }
-            }
-            catch
-            {
+            } catch {
                 MessageBox.Show("There was a problem printing your orderlist!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
-        private void SaveToFile_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
+        private void SaveToFile_Click(object sender, RoutedEventArgs e) {
+            try {
                 if (_orderList.Count == 0)
                     return;
-                else
-                {
-                    SaveFileDialog saveList = new SaveFileDialog
-                    {
+                else {
+                    SaveFileDialog saveList = new SaveFileDialog {
                         Filter = " TXT-fil| *.txt",
                         Title = "Spara Plocklistan",
                         FileName = $"Plocklista - {DateTime.Now.ToString("yyyy.MM.dd kl. HH.mm")}"
                     };
-                    if (saveList.ShowDialog() == true)
-                    {
+                    if (saveList.ShowDialog() == true) {
                         StreamWriter writer = new StreamWriter(saveList.OpenFile());
                         writer.WriteLine($"Plocklistan skapad den {DateTime.Now.ToString("yyyy.MM.dd kl. HH:mm")}", false);
                         writer.WriteLine("\n\n");
                         writer.WriteLine($"Varor att Plocka:");
 
-                        for (int i = 0; i < _orderList.Count; i++)
-                        {
+                        for (int i = 0; i < _orderList.Count; i++) {
                             writer.WriteLine(_orderList[i].ToString());
                         }
 
@@ -91,32 +76,23 @@ namespace GruppArbete_OOP
                         Environment.Exit(0);
                     }
                 }
-            }
-            catch
-            {
+            } catch {
                 MessageBox.Show("There was a problem saving your orderlist!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
+       private void RemoveFromCartButton_Click(object sender, RoutedEventArgs e) {
 
-
-        private void RemoveFromCartButton_Click(object sender, RoutedEventArgs e)
-        {
-
-            if (CartListBox.SelectedIndex >= 0)
-            {
-                if (_orderList[CartListBox.SelectedIndex].Quantity > 1)
-                {
+            if (CartListBox.SelectedIndex >= 0) {
+                if (_orderList[CartListBox.SelectedIndex].Quantity > 1) {
                     AdjustItemsQuantity(_orderList[CartListBox.SelectedIndex]);
                     _orderList[CartListBox.SelectedIndex].Quantity--;
                     CartListBox.Items.Clear();
 
-                    foreach (var item in _orderList)
-                    {
+                    foreach (var item in _orderList) {
                         CartListBox.Items.Add(item);
                     }
                 }
-                else
-                {
+                else {
                     AdjustItemsQuantity(_orderList[CartListBox.SelectedIndex]);
                     _orderList.RemoveAt(CartListBox.SelectedIndex);
                     CartListBox.Items.RemoveAt(CartListBox.SelectedIndex);
@@ -124,25 +100,20 @@ namespace GruppArbete_OOP
             }
         }
 
-        private void AdjustItemsQuantity(Item item)
-        {
+        private void AdjustItemsQuantity(Item item) {
             _mainWindow.warehouse.WarehouseStorage[item.Identifier].Quantity++;
         }
 
-        private void BackToWarehouseButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void BackToWarehouseButton_Click(object sender, RoutedEventArgs e) {
             _mainWindow.Show();
             this.Hide();
         }
 
-        private void ClearCartButton_Click(object sender, RoutedEventArgs e)
-        {
+        private void ClearCartButton_Click(object sender, RoutedEventArgs e) {
             CartListBox.Items.Clear();
 
-            foreach (var item in _orderList)
-            {
-                while (item.Quantity > 0)
-                {
+            foreach (var item in _orderList) {
+                while (item.Quantity > 0) {
                     AdjustItemsQuantity(item);
                     item.Quantity--;
                 }

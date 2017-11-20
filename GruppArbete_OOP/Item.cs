@@ -71,8 +71,8 @@ namespace GruppArbete_OOP
         /// <returns></returns>
         public int CompareTo(object obj)
         {
-            Item item = obj as Item;
-            return this.Price - item.Price;
+            Item item = obj as Item; //TODO There might be a null exception if object is not an Item. HANDLE EXCEPTION by throwing a custom Exception!
+            return this.Price - item.Price; 
         }
     }
     public class Book : Item
