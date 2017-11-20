@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -21,20 +22,35 @@ namespace GruppArbete_OOP
         }
 
         public void AddToCart(Item item) {
+
             item.Quantity = 0;
-            //TODO You can use LINQ here too. 
-            for (int i = 0; i < _orderList.Count; i++) {
-                if (_orderList[i].Identifier == item.Identifier) {
-                    _orderList[i].Quantity++;
-                    CartListBox.Items.Remove(_orderList[i]);
-                    CartListBox.Items.Add(_orderList[i]);
-                    return;
-                }
+            var itemToAdd = _orderList.Where(i => i.Identifier == item.Identifier).Select(i => i).ToList();
+
+            foreach (var i in itemToAdd)
+            {
+                i.Quantity++;
+                CartListBox.Items.Remove(i);
+                CartListBox.Items.Add(i);
             }
 
-            item.Quantity++;
-            _orderList.Add(item);
-            CartListBox.Items.Add(item);
+            if (itemToAdd.Count == 0)
+            {
+                item.Quantity++;
+                _orderList.Add(item);
+                CartListBox.Items.Add(item);
+            }
+
+            ////TODO You can use LINQ here too. 
+            //for (int i = 0; i < _orderList.Count; i++) {
+            //    if (_orderList[i].Identifier == item.Identifier) {
+            //        _orderList[i].Quantity++;
+            //        CartListBox.Items.Remove(_orderList[i]);
+            //        CartListBox.Items.Add(_orderList[i]);
+            //        return;
+            //    }
+            //}
+
+
 
         }
 
