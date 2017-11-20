@@ -62,14 +62,16 @@ namespace GruppArbete_OOP
             StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.dat");
             string line;
             while ((line = reader.ReadLine()) != null) {
-                var fields = line.Split(new[] { ',' });
+                var fields = line.Split(new[] { ',' }); //TODO Serializer is fixed now.
                 if (fields[3] == "Book") {
-                    WarehouseStorage.Add(Guid.Parse(fields[4]), new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
-                    BookList.Add(new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
+                    Book book = new Book(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4]));
+                    WarehouseStorage.Add(Guid.Parse(fields[4]), book);
+                    BookList.Add(book);
                 }
                 if (fields[3] == "Film") {
-                    WarehouseStorage.Add(Guid.Parse(fields[4]), new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
-                    FilmList.Add(new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4])));
+                    Film film = new Film(fields[0], int.Parse(fields[1]), int.Parse(fields[2]), fields[3], Guid.Parse(fields[4]));
+                    WarehouseStorage.Add(Guid.Parse(fields[4]), film);
+                    FilmList.Add(film);
 
                 }
             }
@@ -87,7 +89,7 @@ namespace GruppArbete_OOP
         public List<Item> PerformSearch(List<Item> searchList, object type, string name, string price, string quantity, string guid) {
             // TODO: use a single where clause with multiple conditions inside. Its more efficient.
             var resultList = searchList
-                .Where(item => item.Type.ToLower().Contains(type.ToString().ToLower()) && 
+                .Where(item => item.Type.ToLower().Contains(type.ToString().ToLower()) && //TODO <= Like so...
                 item.Title.ToLower().Contains(name.ToLower()))
                 .Where(item => item.Price.ToString().Contains(price))
                 .Where(item => item.Quantity.ToString().Contains(quantity))
@@ -105,7 +107,7 @@ namespace GruppArbete_OOP
             switch (itemToRemove.Type) {
                 case "Book": {
 
-                        //var item  = BookList.SingleOrDefault(i => i.Identifier == itemToRemove.Identifier);
+                        //var item  = BookList.SingleOrDefault(i => i.Identifier == itemToRemove.Identifier); //TODO <= like so
                         //if(item != null) {
                         //    BookList.Remove(item);
                         //}
@@ -132,7 +134,7 @@ namespace GruppArbete_OOP
 
         public Item AddItems(string title, int price, int quantity, string type)
         {
-            if (type == "Book") //TODO Serializer creates 2 instances of the same object! this method creates only one! hence bugs.
+            if (type == "Book") //TODO Serializer created 2 instances of the same object! this method creates only one! hence bugs. it is fixed now.
             {
                 Book book = new Book(title, price, quantity, type);
                 WarehouseStorage.Add(book.Identifier, book);
