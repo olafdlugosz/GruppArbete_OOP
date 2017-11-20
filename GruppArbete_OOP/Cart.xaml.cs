@@ -22,7 +22,7 @@ namespace GruppArbete_OOP
 
         public void AddToCart(Item item) {
             item.Quantity = 0;
-
+            //TODO You can use LINQ here too. 
             for (int i = 0; i < _orderList.Count; i++) {
                 if (_orderList[i].Identifier == item.Identifier) {
                     _orderList[i].Quantity++;

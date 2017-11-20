@@ -7,7 +7,7 @@ using System.Windows.Controls;
 namespace GruppArbete_OOP
 {
 
-    public class Warehouse : IPrintable
+    public class Warehouse
     {
         public Dictionary<Guid, Item> WarehouseStorage;
         public List<Book> BookList;
@@ -29,11 +29,11 @@ namespace GruppArbete_OOP
             foreach (var item in WarehouseStorage) {
                 writer.WriteLine(item.Value.LineUpClassPropertiesForStreamReader()); //<= writes a specifically formatted string for the Serializer.(See Item Class)
             } 
-            writer.Close();
+            writer.Close();//TODO use a "using" statement instead of manually disposing every time.
             writer.Dispose();
         }
         public void SaveData(List<Book> BookList) {
-            StreamWriter writer = new StreamWriter($"{FilePath}//BookList.txt", false);
+            StreamWriter writer = new StreamWriter($"{FilePath}//BookList.txt", false); //TODO Handle exceptions INSIDE THE CLASS, not in the API.
             foreach (var item in BookList) {
                 writer.WriteLine(item.ToString());
             }
@@ -58,7 +58,7 @@ namespace GruppArbete_OOP
             WarehouseStorage.Clear();
             BookList.Clear();
             FilmList.Clear();
-
+            //TODO add "using" here too. 
             StreamReader reader = new StreamReader($"{FilePath}//WarehouseDatabase.dat");
             string line;
             while ((line = reader.ReadLine()) != null) {
@@ -75,7 +75,7 @@ namespace GruppArbete_OOP
             }
         }
 
-        public List<Item> CheckObjectType(ComboBox comboBox) {
+        public List<Item> CheckObjectType(ComboBox comboBox) { //TODO Rename the method. The name implies a bool in developer terms. GetObjectType() is better.
             if (comboBox.SelectedItem.ToString() == "Book")
                 return BookList.ToList<Item>();
             else if (comboBox.SelectedItem.ToString() == "Film")
@@ -85,10 +85,10 @@ namespace GruppArbete_OOP
         }
 
         public List<Item> PerformSearch(List<Item> searchList, object type, string name, string price, string quantity, string guid) {
-
+            // TODO: use a single where clause with multiple conditions inside. Its more efficient.
             var resultList = searchList
-                .Where(item => item.Type.ToLower().Contains(type.ToString().ToLower()))
-                .Where(item => item.Title.ToLower().Contains(name.ToLower()))
+                .Where(item => item.Type.ToLower().Contains(type.ToString().ToLower()) && 
+                item.Title.ToLower().Contains(name.ToLower()))
                 .Where(item => item.Price.ToString().Contains(price))
                 .Where(item => item.Quantity.ToString().Contains(quantity))
                 .Where(item => item.Identifier.ToString().ToLower().Contains(guid.ToLower()))
@@ -104,6 +104,12 @@ namespace GruppArbete_OOP
 
             switch (itemToRemove.Type) {
                 case "Book": {
+
+                        //var item  = BookList.SingleOrDefault(i => i.Identifier == itemToRemove.Identifier);
+                        //if(item != null) {
+                        //    BookList.Remove(item);
+                        //}
+
                         for (int i = 0; i < BookList.Count; i++) {
                             if (BookList[i].Identifier == itemToRemove.Identifier)
                                 BookList.Remove(BookList[i]);
@@ -126,12 +132,12 @@ namespace GruppArbete_OOP
 
         public Item AddItems(string title, int price, int quantity, string type)
         {
-            if (type == "Book")
+            if (type == "Book") //TODO Serializer creates 2 instances of the same object! this method creates only one! hence bugs.
             {
                 Book book = new Book(title, price, quantity, type);
                 WarehouseStorage.Add(book.Identifier, book);
                 BookList.Add(book);
-                return book as Item;
+                return book as Item; //TODO Casting unneccesary!
             }
             else if (type == "Film")
             {
