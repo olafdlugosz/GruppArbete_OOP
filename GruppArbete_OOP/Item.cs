@@ -62,7 +62,7 @@ namespace GruppArbete_OOP
         /// </summary>
         /// <returns></returns>
         public string LineUpClassPropertiesForStreamReader() {
-            return String.Format($"{Title},{Price},{Quantity},{Type},{Identifier}");
+            return ($"{Title},{Price},{Quantity},{Type},{Identifier}");
         }
         /// <summary>
         /// Method from inherited interface to be used together with LINQ
