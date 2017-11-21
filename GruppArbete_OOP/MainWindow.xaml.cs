@@ -100,7 +100,7 @@ namespace GruppArbete_OOP
             else
             {
                 ClearListBox();
-                resultList = warehouse.PerformSearch(warehouse.CheckObjectType(ComboBox),
+                resultList = warehouse.PerformSearch(warehouse.GetObjectType(ComboBox),
                     ComboBox.SelectedItem, NameTextBox.Text, PriceTextBox.Text,
                     QuantityTextBox.Text, GuidTextBox.Text);
 
