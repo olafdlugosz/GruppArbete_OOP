@@ -77,7 +77,7 @@ namespace GruppArbete_OOP
             }
         }
 
-        public List<Item> CheckObjectType(ComboBox comboBox) { //TODO Rename the method. The name implies a bool in developer terms. GetObjectType() is better.
+        public List<Item> GetObjectType(ComboBox comboBox) { 
             if (comboBox.SelectedItem.ToString() == "Book")
                 return BookList.ToList<Item>();
             else if (comboBox.SelectedItem.ToString() == "Film")
