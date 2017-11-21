@@ -73,7 +73,7 @@ namespace GruppArbete_OOP
         {
             try
             {
-            Item item = obj as Item; //TODO There might be a null exception if object is not an Item. HANDLE EXCEPTION by throwing a custom Exception! - DONE! WITH InvalidCastException :)
+            Item item = obj as Item;
                 return this.Price - item.Price; 
             }
             catch

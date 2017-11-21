@@ -23,21 +23,30 @@ namespace GruppArbete_OOP
         }
 
         public void AddToCart(Item item)
-        {            
-            var itemToAdd = _orderList.SingleOrDefault(i => i.Identifier == item.Identifier);
+        {
+            try
+            {
+                var itemToAdd = _orderList.SingleOrDefault(i => i.Identifier == item.Identifier);
 
-            if (itemToAdd == null)
-            {
-                item.Quantity = 1;
-                _orderList.Add(item);
-                CartListBox.Items.Add(item);
+                if (itemToAdd == null)
+                {
+                    item.Quantity = 1;
+                    _orderList.Add(item);
+                    CartListBox.Items.Add(item);
+                }
+
+                else
+                {
+                    itemToAdd.Quantity++;
+                    CartListBox.Items.Remove(itemToAdd);
+                    CartListBox.Items.Add(itemToAdd);
+                }
             }
-            else
+            catch (InvalidOperationException exception)
             {
-                itemToAdd.Quantity++;
-                CartListBox.Items.Remove(itemToAdd);
-                CartListBox.Items.Add(itemToAdd);
+                MessageBox.Show(exception.Message, "Error!", MessageBoxButton.OK, MessageBoxImage.Error);
             }
+
         }
 
         private void Print_Click(object sender, RoutedEventArgs e)
@@ -49,7 +58,6 @@ namespace GruppArbete_OOP
                 if (print == true)
                 {
                     printDlg.PrintVisual(CartListBox, "Printing Order");
-                    CartListBox.Items.Clear();
                 }
             }
             catch
@@ -72,21 +80,21 @@ namespace GruppArbete_OOP
                         Title = "Spara Plocklistan",
                         FileName = $"Plocklista - {DateTime.Now.ToString("yyyy.MM.dd kl. HH.mm")}"
                     };
+
                     if (saveList.ShowDialog() == true)
                     {
-                        StreamWriter writer = new StreamWriter(saveList.OpenFile());
-                        writer.WriteLine($"Plocklistan skapad den {DateTime.Now.ToString("yyyy.MM.dd kl. HH:mm")}", false);
-                        writer.WriteLine("\n\n");
-                        writer.WriteLine($"Varor att Plocka:");
-
-                        for (int i = 0; i < _orderList.Count; i++)
+                        using (StreamWriter writer = new StreamWriter(saveList.OpenFile()))
                         {
-                            writer.WriteLine(_orderList[i].ToString());
-                        }
+                            writer.WriteLine($"Plocklistan skapad den {DateTime.Now.ToString("yyyy.MM.dd kl. HH:mm")}", false);
+                            writer.WriteLine("\n\n");
+                            writer.WriteLine($"Varor att Plocka:");
 
-                        writer.Dispose();
-                        writer.Close();
-                        Environment.Exit(0);
+                            for (int i = 0; i < _orderList.Count; i++)
+                            {
+                                writer.WriteLine(_orderList[i].ToString());
+                            }
+
+                        }
                     }
                 }
             }
