@@ -23,10 +23,8 @@ namespace GruppArbete_OOP
         }
 
         public void AddToCart(Item item)
-        {
-
-            //TODO You can use LINQ here too. - DONE!
-            var itemToAdd = _orderList.FirstOrDefault(i => i.Identifier == item.Identifier);
+        {            
+            var itemToAdd = _orderList.SingleOrDefault(i => i.Identifier == item.Identifier);
 
             if (itemToAdd == null)
             {

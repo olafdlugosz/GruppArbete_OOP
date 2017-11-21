@@ -134,19 +134,19 @@ namespace GruppArbete_OOP
 
         public Item AddItems(string title, int price, int quantity, string type)
         {
-            if (type == "Book") //TODO Serializer created 2 instances of the same object! this method creates only one! hence bugs. it is fixed now.
+            if (type == "Book") 
             {
                 Book book = new Book(title, price, quantity, type);
                 WarehouseStorage.Add(book.Identifier, book);
                 BookList.Add(book);
-                return book as Item; //TODO Casting unneccesary!
+                return book; 
             }
             else if (type == "Film")
             {
                 Film film = new Film(title, price, quantity, type);
                 WarehouseStorage.Add(film.Identifier, film);
                 FilmList.Add(film);
-                return film as Item;
+                return film;
             }
 
             return null;
