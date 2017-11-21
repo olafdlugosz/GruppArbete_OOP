@@ -25,7 +25,7 @@ namespace GruppArbete_OOP
         /// Custom made Serializer. SaveData() is overloaded and can be used with different input parameters.
         /// </summary>
         /// <param name="WarehouseStorage">The main Warehouse Storage dictionary.</param>
-        public void SaveData(Dictionary<Guid, Item> WarehouseStorage)
+        public void SaveDataBase(Dictionary<Guid, Item> WarehouseStorage)
         {
             using (StreamWriter writer = new StreamWriter($"{FilePath}//WarehouseDatabase.dat", false))
             {
@@ -35,7 +35,7 @@ namespace GruppArbete_OOP
                 }
             }
         }
-        public void SaveData(List<Book> BookList)
+        public void SaveBookList(List<Book> BookList)
         {
             using (StreamWriter writer = new StreamWriter($"{FilePath}//BookList.txt", false))
             {
@@ -45,7 +45,7 @@ namespace GruppArbete_OOP
                 }
             }
         }
-        public void SaveData(List<Film> FilmList)
+        public void SaveFilmList(List<Film> FilmList)
         {
             using (StreamWriter writer = new StreamWriter($"{FilePath}//FilmList.txt", false))
             {
@@ -62,7 +62,7 @@ namespace GruppArbete_OOP
         /// The values in the fields correspond to class properties and can therefore be used to create instances
         /// of the corresponding objects. Objects are later added to their respective Lists and the main Dictionary.
         /// </summary>
-        public void LoadData()
+        public void LoadDataBase()
         {
             WarehouseStorage.Clear();
             BookList.Clear();

@@ -67,9 +67,9 @@ namespace GruppArbete_OOP
         {
             try
             {
-                warehouse.SaveData(warehouse.WarehouseStorage);
-                if (warehouse.BookList.Count != 0) { warehouse.SaveData(warehouse.BookList); };
-                if (warehouse.FilmList.Count != 0) { warehouse.SaveData(warehouse.FilmList); };
+                warehouse.SaveDataBase(warehouse.WarehouseStorage);
+                if (warehouse.BookList.Count != 0) { warehouse.SaveBookList(warehouse.BookList); };
+                if (warehouse.FilmList.Count != 0) { warehouse.SaveFilmList(warehouse.FilmList); };
                 MessageBox.Show("Saving successful!", "Saved!", MessageBoxButton.OK, MessageBoxImage.Information);
 
             }
@@ -83,7 +83,7 @@ namespace GruppArbete_OOP
         {
             try
             {
-                warehouse.LoadData();
+                warehouse.LoadDataBase();
                 MessageBox.Show("Loading successful!", "Loaded!", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             catch

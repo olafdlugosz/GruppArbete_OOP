@@ -72,7 +72,6 @@
     <Compile Include="Cart.xaml.cs">
       <DependentUpon>Cart.xaml</DependentUpon>
     </Compile>
-    <Compile Include="IPrintable.cs" />
     <Compile Include="Item.cs" />
     <Compile Include="Warehouse.cs" />
     <Compile Include="MainWindow.xaml.cs">
