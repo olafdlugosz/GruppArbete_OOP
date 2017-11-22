@@ -9,7 +9,7 @@
     <StackPanel>
         <DockPanel>
             <Menu DockPanel.Dock="Top">
-                <MenuItem Header="Database" Click="MenuItem_Click">
+                <MenuItem Header="Database">
                     <MenuItem Header="Save" Click="MenuItem_Click_1"/>
                     <MenuItem Header="Load" Click="MenuItem_Click_2"/>
                 </MenuItem>
@@ -19,7 +19,7 @@
             <StackPanel Width="30"/>
             <StackPanel Margin="10, 0, 50, 0" VerticalAlignment="Center">
                 <TextBlock Text ="Type:" HorizontalAlignment="Center"/>
-                <ComboBox x:Name="ComboBox" Margin="10,0,10,10" Width="120" SelectionChanged="ComboBox_SelectionChanged"/>
+                <ComboBox x:Name="ComboBox" Margin="10,0,10,10" Width="120"/>
                 <TextBlock Text="Name:" HorizontalAlignment="Center"/>
                 <TextBox x:Name="NameTextBox" Margin="10,0,10,10"/>
                 <TextBlock Text="Price:" HorizontalAlignment="Center"/>
